@@ -1,0 +1,206 @@
+{
+  "floors": [
+    {
+      "id": "3F",
+      "label": "Heads"
+    },
+    {
+      "id": "2F",
+      "label": "PMs"
+    },
+    {
+      "id": "1F",
+      "label": "Workers"
+    }
+  ],
+  "departments": [
+    {
+      "id": "optics",
+      "name": "Optics",
+      "color": "#4A90D9"
+    },
+    {
+      "id": "painting",
+      "name": "Painting",
+      "color": "#E89B3C"
+    },
+    {
+      "id": "office",
+      "name": "Office",
+      "color": "#5BAE6C"
+    }
+  ],
+  "groups": [],
+  "seats": [
+    {
+      "id": "3f-office-head",
+      "floor": "3F",
+      "department": "office",
+      "title": "Office Head"
+    },
+    {
+      "id": "3f-optics-head",
+      "floor": "3F",
+      "department": "optics",
+      "title": "Optics Head"
+    },
+    {
+      "id": "3f-painting-head",
+      "floor": "3F",
+      "department": "painting",
+      "title": "Painting Head"
+    },
+    {
+      "id": "2f-office-pm",
+      "floor": "2F",
+      "department": "office",
+      "title": "Office PM"
+    },
+    {
+      "id": "2f-optics-pm",
+      "floor": "2F",
+      "department": "optics",
+      "title": "Optics PM"
+    },
+    {
+      "id": "2f-painting-pm",
+      "floor": "2F",
+      "department": "painting",
+      "title": "Painting PM"
+    },
+    {
+      "id": "1f-painting-ins-sampler",
+      "floor": "1F",
+      "department": "painting",
+      "title": "Ins Sampler"
+    },
+    {
+      "id": "1f-optics-open",
+      "floor": "1F",
+      "department": "optics",
+      "title": "待招",
+      "vacant": true
+    },
+    {
+      "id": "1f-office-open",
+      "floor": "1F",
+      "department": "office",
+      "title": "待招",
+      "vacant": true
+    }
+  ],
+  "layout": {
+    "width": 640,
+    "height": 400,
+    "core": {
+      "x": 0,
+      "y": 110,
+      "w": 72,
+      "h": 180,
+      "label": "电梯/楼梯"
+    },
+    "corridor": {
+      "x": 72,
+      "y": 170,
+      "w": 568,
+      "h": 56,
+      "label": "走廊"
+    },
+    "lobby": {
+      "x": 72,
+      "y": 226,
+      "w": 150,
+      "h": 174,
+      "label": "门厅/接待"
+    },
+    "rooms": [
+      {
+        "id": "optics",
+        "department": "optics",
+        "x": 72,
+        "y": 0,
+        "w": 300,
+        "h": 170,
+        "label": "Optics"
+      },
+      {
+        "id": "painting",
+        "department": "painting",
+        "x": 372,
+        "y": 0,
+        "w": 268,
+        "h": 170,
+        "label": "Painting"
+      },
+      {
+        "id": "office",
+        "department": "office",
+        "x": 222,
+        "y": 226,
+        "w": 290,
+        "h": 174,
+        "label": "Office"
+      },
+      {
+        "id": "rest",
+        "kind": "rest",
+        "x": 512,
+        "y": 226,
+        "w": 128,
+        "h": 174,
+        "label": "休息区"
+      }
+    ],
+    "restArea": {
+      "roomId": "rest",
+      "label": "休息区",
+      "x": 512,
+      "y": 226,
+      "w": 128,
+      "h": 174,
+      "slots": [
+        { "x": 524, "y": 258 },
+        { "x": 524, "y": 298 },
+        { "x": 524, "y": 338 }
+      ]
+    },
+    "deskSlots": [
+      {
+        "department": "optics",
+        "x": 110,
+        "y": 40,
+        "facing": "S"
+      },
+      {
+        "department": "optics",
+        "x": 240,
+        "y": 40,
+        "facing": "S"
+      },
+      {
+        "department": "painting",
+        "x": 410,
+        "y": 40,
+        "facing": "S"
+      },
+      {
+        "department": "painting",
+        "x": 530,
+        "y": 40,
+        "facing": "S"
+      },
+      {
+        "department": "office",
+        "x": 250,
+        "y": 290,
+        "facing": "N"
+      },
+      {
+        "department": "office",
+        "x": 380,
+        "y": 290,
+        "facing": "N"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "source": "mock",
+  "seats": {
+    "3f-office-head": "busy",
+    "3f-optics-head": "idle",
+    "3f-painting-head": "unknown",
+    "2f-office-pm": "busy",
+    "2f-optics-pm": "idle",
+    "2f-painting-pm": "working",
+    "1f-painting-ins-sampler": "busy",
+    "1f-optics-open": "unknown",
+    "1f-office-open": "unknown"
+  }
+}
