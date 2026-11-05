@@ -1,14 +1,58 @@
 {
-  "source": "mock",
-  "seats": {
-    "3f-office-head": "busy",
-    "3f-optics-head": "idle",
-    "3f-painting-head": "unknown",
-    "2f-office-pm": "busy",
-    "2f-optics-pm": "idle",
-    "2f-painting-pm": "working",
-    "1f-painting-ins-sampler": "busy",
-    "1f-optics-open": "unknown",
-    "1f-office-open": "unknown"
-  }
+  "records": [
+    {
+      "seatKey": "3F|office|Office Head",
+      "working": true,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "3F|optics|Optics Head",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "3F|painting|Painting Head",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "2F|office|Office PM",
+      "working": true,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "2F|optics|Optics PM",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "2F|painting|Painting PM",
+      "working": true,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|painting|Ins Sampler",
+      "working": true,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|optics|待招",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|office|待招",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    }
+  ]
 }

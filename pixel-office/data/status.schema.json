@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StatusFile",
+  "type": "object",
+  "required": [
+    "records"
+  ],
+  "properties": {
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/StatusRecord"
+      }
+    }
+  },
+  "$defs": {
+    "StatusRecord": {
+      "type": "object",
+      "required": [
+        "seatKey"
+      ],
+      "properties": {
+        "seatKey": {
+          "type": "string",
+          "description": "floor|department|title"
+        },
+        "working": {
+          "type": "boolean",
+          "description": "true=桌前(工作) false=休息区(不工作)"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "working",
+            "away"
+          ],
+          "description": "可选替代 working"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "mock",
+            "live"
+          ]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "description": "缺失/未知记录一律视为不工作"
+    }
+  }
+}
