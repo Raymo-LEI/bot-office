@@ -26,3 +26,11 @@ cd pixel-office && python3 -m http.server 8765
 
 ### mock → live
 改 `js/status.js` 的 `STATUS_URL` 指向 live 端点（同一 StatusFile 形状），或替换 `data/status.mock.json`。
+
+## 外观插槽（avatar slots，占位）
+
+可选字段：`avatarUrl`（string|null）、`avatarShape`（`round`|`square`，缺省 square）、`avatarColor`（CSS 颜色，覆盖身体色）。
+可写在 `data/status*.json` 的 StatusRecord 上，也可写在 `data/org.json` 的 seat 上；**status 记录值优先于 seat 值**，缺失字段忽略。
+无 `avatarUrl` 时回退为通用像素小人（身体=部门色）。目前没有官方 live 头像源，这些字段仅为占位插槽；demo 图为 `assets/avatar-demo.png`（本地生成）。
+
+不工作（人在休息区）时，原工位名牌变灰、虚线框并标「(离席)」，桌椅保留。

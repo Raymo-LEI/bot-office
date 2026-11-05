@@ -13,10 +13,20 @@ function working(seat) {
   return window.StatusAPI ? StatusAPI.isWorking(seat, statusMap) : false;
 }
 
+// 外观插槽：status 记录覆盖 seat；缺省 → 通用像素小人
+function appearance(seat) {
+  const rec = (window.StatusAPI && statusMap.get(StatusAPI.seatKey(seat))) || {};
+  const pick = k => (rec[k] != null && rec[k] !== '') ? rec[k] : ((seat[k] != null && seat[k] !== '') ? seat[k] : null);
+  return { url: pick('avatarUrl'), shape: pick('avatarShape'), color: pick('avatarColor') };
+}
+const cssUrl = u => String(u).replace(/["'()\\\s]/g, encodeURIComponent);
 function personHTML(seat, color, x, y, where) {
   const short = seat.title; // full name; desk tokens hide label (desk already shows title)
+  const a = appearance(seat);
+  const shape = a.shape === 'round' ? ' shape-round' : '';
+  const headStyle = a.url ? ` style="background-image:url('${esc(cssUrl(a.url))}')"` : '';
   return `<div class="person at-${where}" style="left:${x}px;top:${y}px" title="${esc(seat.title)} · ${where === 'desk' ? '工作' : '不工作'}">` +
-    `<i class="p-head"></i><i class="p-body" style="background:${color}"></i>` +
+    `<i class="p-head${a.url ? ' has-img' : ''}${shape}"${headStyle}></i><i class="p-body" style="background:${esc(a.color || color)}"></i>` +
     `<em>${esc(short)}</em></div>`;
 }
 
@@ -42,9 +52,10 @@ function planHTML(groups) {
     if (!k) return;
     const d = dm[s.department] || {color:'#999'};
     // desk always drawn
-    h += `<div class="desk f${k.facing||'S'} ${s.vacant?'vacant':''}" style="left:${k.x}px;top:${k.y}px">` +
+    const away = !s.vacant && !working(s);
+    h += `<div class="desk f${k.facing||'S'} ${s.vacant?'vacant':''}${away?' away':''}" style="left:${k.x}px;top:${k.y}px">` +
       `<b style="background:${s.vacant?'transparent':d.color}"></b><i class="chair"></i>` +
-      `<em>${esc(s.title)}${s.groupId?`<small>${esc((groups[s.groupId]||{}).name||s.groupId)}</small>`:''}</em></div>`;
+      `<em>${esc(s.title)}${away?'<i class="away-tag">(离席)</i>':''}${s.groupId?`<small>${esc((groups[s.groupId]||{}).name||s.groupId)}</small>`:''}</em></div>`;
     // vacant: empty desk, no person
     if (s.vacant) return;
     if (working(s)) {

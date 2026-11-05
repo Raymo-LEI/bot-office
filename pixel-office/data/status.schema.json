@@ -46,9 +46,28 @@
         "updatedAt": {
           "type": "string",
           "format": "date-time"
+        },
+        "avatarUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "可选头像图 URL（占位插槽；无官方真源）。缺省→通用像素头"
+        },
+        "avatarShape": {
+          "type": "string",
+          "enum": [
+            "round",
+            "square"
+          ],
+          "description": "可选头型；缺省=square"
+        },
+        "avatarColor": {
+          "type": "string",
+          "description": "可选 CSS 颜色，覆盖身体色（默认部门色）"
         }
       },
-      "description": "缺失/未知记录一律视为不工作"
+      "description": "缺失/未知记录一律视为不工作；avatar* 字段可选，也可写在 org.json seat 上，status 记录值优先"
     }
   }
 }
