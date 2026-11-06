@@ -45,7 +45,7 @@ Details, port fallback (8766–8768), and the optional status bridge: [pixel-off
 
 ## Live status (optional, local only)
 
-There is **no** official browser-pollable status API. On your own machine, with your own grokbot login, you can run the bundled bridge so it polls `grokbot status --json` and writes a gitignored live status file. Without the CLI (or if the bridge fails), the page still runs on mock data. The static page never reads desktop logins, client config, tokens, or sessions.
+There is **no** official browser-pollable status API. On your own machine you can sign in once with `python3 tools/status-bridge/login.py` (from `pixel-office/`; it opens your browser for an independent session), and the bundled bridge — started by `start-office.command`, or `python3 tools/status-bridge/bridge.py` — then writes a gitignored live status file. The bridge queries an unpublished backend that may change; it is not an official API. Its tokens stay in a local gitignored file. If you are not signed in or the query fails, the page still runs on mock data and the launcher still opens it. The static page never reads desktop logins, client config, tokens, or sessions.
 
 ## What’s in the repo
 

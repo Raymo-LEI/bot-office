@@ -1,0 +1,5 @@
+# Query-failure: fake session, HTTP layer stubbed to return 503 (no network)
+before: live exists=yes
+status-bridge: live status unavailable: query failed: GrokBotService/ListGrokBotAgents failed (HTTP 503, unavailable); removed data/status.live.json; the page will use mock status.
+exit=1
+after: live exists=no

@@ -1,6 +1,6 @@
 # Research: official bot roster / status / avatar interfaces
 
-Date: 2026-11-06 (Asia/Tokyo). Scope: official or authorized paths only; no cookies, no undocumented internal HTTP, no credentials.
+Scope: official or authorized paths only; no cookies, no desktop-app credentials, no client config files.
 
 ## Conclusion
 
@@ -8,15 +8,15 @@ There is **no** official HTTP/MCP API that this static browser page can poll for
 
 ## Optional local bridge
 
-An optional **local** bridge is available: `tools/status-bridge/bridge.py` runs `grokbot status --json` on the user’s own machine, using the user’s own grokbot login, and writes only `{records:[{seatKey, working, source, updatedAt}]}` to `data/status.live.json`. This is not a browser-pollable official API and not a claim that an official live API exists. The `grokbot` CLI output is undocumented and may change with the client. Not for a public page.
+An optional **local** bridge is available: `tools/status-bridge/bridge.py` runs on the user's own machine. After a one-time independent browser sign-in (`python3 tools/status-bridge/login.py`), it queries an **unpublished** backend for the user's bots and their status, and writes only `{records:[{seatKey, working, source, updatedAt}]}` to `data/status.live.json`. Earlier versions shelled out to an external command-line client; that dependency was removed. This is not a browser-pollable official API and not a claim that an official live API exists. The backend may change without notice. Not for a public page. Flow details: [connect-status-notes.md](connect-status-notes.md).
 
 ## Official tools examined
 
 | Path | Can read | Cannot read |
 |------|----------|-------------|
 | Team Bot search | Team Bot id/name/description/added | personal roster, working status, avatar images |
-| Agent create / update | write own profile fields | bulk read of others’ status |
-| Avatar update | set/clear this bot’s own avatar | any bot’s avatar URL for the page |
+| Agent create / update | write own profile fields | bulk read of others' status |
+| Avatar update | set/clear this bot's own avatar | any bot's avatar URL for the page |
 | Agent messaging | message delivery | status queries |
 | Own subagent progress | progress of own subagents | whether teammates are working |
 | Prompt teammate context | per-turn ids/descriptions | stable pollable API, avatars, status |
@@ -24,7 +24,7 @@ An optional **local** bridge is available: `tools/status-bridge/bridge.py` runs 
 
 ## Local profile files
 
-Local agent profile files may exist on a shared machine, but they are internal configuration, not a documented API. They are **not** used as a status or appearance source. Do not use internal profile files, desktop logins, or client config folders as a source for this page.
+Local agent profile files and the desktop app's stored login may exist on a machine, but they are internal, not a documented API. They are **not** used as a status or appearance source, and the bridge never reads them; it keeps its own session.
 
 ## Field mapping
 

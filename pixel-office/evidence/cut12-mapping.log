@@ -1,0 +1,10 @@
+# Mapping demo: bridge.py --from-fixture --once in a temp tree with a synthetic org (fake UUIDs)
+# fixture rows: 01 awaiting(+isRunning), 02 live.isRunning, 03 top-level isRunning, 04 workingTaskIds, 05 live.subagents, 06 idle, 99 unmapped
+status-bridge: wrote 6 records to data/status.live.json
+exit=0
+3F|d1|Seat 1 working= False live
+3F|d2|Seat 2 working= True live
+3F|d3|Seat 3 working= True live
+3F|d4|Seat 4 working= True live
+3F|d5|Seat 5 working= True live
+3F|d6|Seat 6 working= False live

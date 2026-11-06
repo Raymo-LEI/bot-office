@@ -149,7 +149,17 @@ office_pick_port() {
 }
 
 office_live_unavailable() {
-  echo "Live status is unavailable (grokbot CLI missing or the bridge failed). The page will use mock status. Log in to grokbot on this machine and run this launcher again to enable live status."
+  echo "Live status is unavailable (not signed in, or the status query failed). The page will use mock status."
+  echo "To enable live status, run once from the pixel-office folder: python3 tools/status-bridge/login.py"
+  echo "Details: .run/bridge.log"
+}
+
+office_login_hint() {
+  if [ ! -f "$ROOT/tools/status-bridge/session.json" ]; then
+    echo "Status bridge: not signed in yet, so the page uses mock status."
+    echo "Run once from the pixel-office folder: python3 tools/status-bridge/login.py"
+    echo "The running bridge picks up the new sign-in on its next poll."
+  fi
 }
 
 office_start_server() {
@@ -173,10 +183,6 @@ office_start_server() {
 
 office_start_bridge() {
   mkdir -p "$RUN_DIR"
-  if ! command -v grokbot >/dev/null 2>&1; then
-    office_live_unavailable
-    return 0
-  fi
   local existing
   existing=$(office_read_pid "$BRIDGE_PID_FILE")
   if office_pid_alive "$existing"; then
@@ -189,6 +195,7 @@ office_start_bridge() {
   if office_pid_alive "$bpid"; then
     echo "$bpid" > "$BRIDGE_PID_FILE"
     STARTED_BRIDGE=1
+    office_login_hint
   else
     rm -f "$BRIDGE_PID_FILE"
     office_live_unavailable

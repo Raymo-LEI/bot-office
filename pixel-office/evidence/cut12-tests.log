@@ -1,0 +1,23 @@
+# Cut12 offline test run (2026-11-06 18:18 JST)
+$ python3 tools/status-bridge/test_bridge.py
+test_401_refresh_then_success (__main__.FailurePaths.test_401_refresh_then_success) ... ok
+test_login_missing (__main__.FailurePaths.test_login_missing) ... [login-missing] exit=2 stderr=status-bridge: live status unavailable: not signed in (no session file). Run: python3 tools/status-bridge/login.py; removed data/status.live.json; the page will use mock status.
+ok
+test_query_failure (__main__.FailurePaths.test_query_failure) ... [query-failure] exit=1 stderr=status-bridge: live status unavailable: query failed: GrokBotService/ListGrokBotAgents failed (HTTP 503, unavailable); removed data/status.live.json; the page will use mock status.
+ok
+test_should_logout (__main__.FailurePaths.test_should_logout) ... [should-logout] exit=2 stderr=status-bridge: live status unavailable: the server ended this session. Run: python3 tools/status-bridge/login.py; removed data/status.live.json; the page will use mock status.
+ok
+test_agent_uuid_prefers_uuid (__main__.Mapping.test_agent_uuid_prefers_uuid) ... ok
+test_fixture_cli_writes_expected_records (__main__.Mapping.test_fixture_cli_writes_expected_records) ... ok
+test_states (__main__.Mapping.test_states) ... ok
+test_visual (__main__.Mapping.test_visual) ... ok
+test_checksum_shape (__main__.Protocol.test_checksum_shape) ... ok
+test_headers (__main__.Protocol.test_headers) ... ok
+test_rpc_allowlist (__main__.Protocol.test_rpc_allowlist) ... ok
+test_session_mode (__main__.Protocol.test_session_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.289s
+
+OK
+exit=0
