@@ -267,6 +267,185 @@
     outline(ctx, w, h, 'k');
   });
 
+  // ---- 4F penthouse ---------------------------------------------------------------
+  const GOLD = '#d4a93a', GOLD_HI = '#f2d16b', GOLD_DK = '#9c7424';
+  const MAH = '#8a3a26', MAH_DK = '#6a2818', MAH_DKR = '#4a180e';
+  const VEL = '#a8323e', VEL_DK = '#7e1f2b', VEL_DKR = '#561420';
+  const marble = () => paint(16, 16, (r, p) => {
+    r(0, 0, 16, 16, '#efe9df'); r(0, 0, 15, 1, '#f8f4ec');
+    [[1, 3], [2, 4], [3, 4], [4, 5], [5, 6], [6, 6], [7, 7], [9, 9], [10, 10], [11, 10], [12, 11], [3, 11], [4, 12]].forEach(([x, y]) => p(x, y, '#d6cdbd'));
+    p(8, 8, '#c9bfae'); p(13, 12, '#c9bfae');
+    r(0, 15, 16, 1, GOLD); r(15, 0, 1, 16, GOLD);
+  });
+  const luxWall = () => paint(16, 22, (r, p) => {
+    r(0, 0, 16, 15, '#1f3550');
+    for (let d = 0; d <= 3; d++) [[8 - d, 7 - (3 - d)], [8 + d, 7 - (3 - d)], [8 - d, 7 + (3 - d)], [8 + d, 7 + (3 - d)]].forEach(([x, y]) => p(x, y, '#b8923a'));
+    p(8, 7, GOLD_HI); p(0, 0, '#b8923a'); p(0, 14, '#b8923a'); p(0, 7, '#2d4a6a');
+    r(0, 15, 16, 1, GOLD_HI); r(0, 16, 16, 1, GOLD_DK);
+    r(0, 17, 16, 4, MAH_DK); r(0, 17, 16, 1, MAH); r(2, 18, 12, 2, MAH_DKR); r(0, 21, 16, 1, '#3a120a');
+  });
+  const water = () => paint(16, 16, (r, p) => {
+    r(0, 0, 16, 16, '#3fa0d8');
+    [[1, 2], [2, 2], [9, 5], [10, 5], [11, 4], [4, 10], [5, 10], [13, 12], [14, 12]].forEach(([x, y]) => p(x, y, '#8ed8f4'));
+    [[6, 1], [12, 8], [2, 13], [8, 14]].forEach(([x, y]) => p(x, y, '#2f86c4'));
+  });
+  const execDesk = () => paint(64, 30, (r, p) => {
+    r(1, 28, 63, 2, 'z');
+    [2, 12].forEach(x => { r(x, 0, 10, 9, 'k'); r(x + 1, 1, 8, 7, 's'); r(x + 2, 2, 6, 5, 'B'); r(x + 2, 2, 6, 1, 'c'); r(x + 3, 4, 3, 1, 'L'); r(x + 3, 5, 4, 1, 'y'); r(x + 4, 9, 2, 3, 'k'); });
+    r(52, 1, 9, 5, 'k'); r(53, 2, 7, 3, GOLD_HI); r(53, 4, 7, 1, GOLD); r(56, 6, 1, 5, GOLD_DK); r(54, 10, 5, 2, GOLD_DK);
+    r(0, 12, 64, 8, 'k'); r(1, 13, 62, 6, MAH); r(1, 13, 62, 1, '#b5573c'); r(1, 18, 62, 1, MAH_DK);
+    r(24, 14, 16, 4, '#2f4a3a'); [[24, 14], [39, 14], [24, 17], [39, 17]].forEach(([x, y]) => p(x, y, GOLD));
+    r(26, 15, 12, 2, 'l'); r(42, 15, 5, 1, GOLD_HI); r(47, 13, 4, 4, 'k'); r(48, 14, 2, 2, 'e'); r(4, 14, 7, 3, 'p'); r(5, 15, 5, 1, 'P');
+    r(0, 20, 64, 9, 'k'); r(1, 20, 62, 8, MAH_DK); r(1, 20, 62, 1, GOLD);
+    [3, 47].forEach(x => { r(x, 22, 14, 5, MAH_DKR); r(x + 1, 23, 12, 3, '#7a3020'); p(x + 7, 24, GOLD); });
+    r(24, 22, 16, 4, GOLD_DK); r(25, 23, 14, 2, GOLD_HI); [27, 29, 31, 33, 35].forEach(x => p(x, 23, GOLD_DK));
+    r(1, 28, 4, 1, GOLD); r(59, 28, 4, 1, GOLD);
+  });
+  const throne = () => paint(18, 18, (r, p) => {
+    r(1, 0, 16, 13, 'k'); r(2, 1, 14, 11, VEL_DK); r(2, 1, 14, 1, VEL); r(6, 0, 6, 1, GOLD);
+    [5, 9, 13].forEach(x => [3, 7].forEach(y => p(x, y, GOLD_HI)));
+    r(0, 12, 18, 5, 'k'); r(1, 13, 16, 3, VEL); r(1, 13, 16, 1, '#c8505a'); r(0, 12, 2, 5, GOLD); r(16, 12, 2, 5, GOLD);
+    r(1, 17, 2, 1, 'k'); r(15, 17, 2, 1, 'k');
+  });
+  const fireplace = () => paint(80, 26, r => {
+    const H = [[3, 6, 9, 7, 11, 8, 10, 6, 8, 5, 9, 7, 10, 6, 8, 4, 6, 3], [5, 8, 6, 10, 7, 11, 7, 9, 6, 10, 6, 9, 7, 9, 5, 7, 4, 5]];
+    [0, 1].forEach(f => {
+      const ox = f * 40;
+      r(ox, 0, 40, 26, 'k'); r(ox + 1, 1, 38, 24, '#d9d0c2'); r(ox + 1, 1, 38, 2, '#efe9df'); r(ox + 1, 3, 38, 1, GOLD);
+      r(ox + 2, 5, 3, 19, '#c9bfae'); r(ox + 35, 5, 3, 19, '#c9bfae');
+      r(ox + 8, 8, 24, 17, '#2a1a14'); r(ox + 9, 9, 22, 15, '#1a0e0a');
+      H[f].forEach((hh, i) => {
+        const x = ox + 11 + i;
+        r(x, 21 - hh, 1, hh, '#e0602f'); if (hh > 3) r(x, 23 - hh, 1, hh - 2, '#f4a23a'); if (hh > 6) r(x, 25 - hh, 1, hh - 5, '#ffe27a');
+      });
+      r(ox + 11, 21, 18, 2, '#6a3a1f'); r(ox + 13, 21, 4, 1, '#8a5a2a'); r(ox + 22, 22, 5, 1, '#8a5a2a');
+      r(ox + 15, 0, 10, 1, GOLD_HI);
+    });
+  });
+  const aquarium = () => paint(112, 24, (r, p) => {
+    [0, 1].forEach(f => {
+      const ox = f * 56;
+      r(ox, 0, 56, 24, 'k'); r(ox + 1, 1, 54, 17, '#2f7fb5'); r(ox + 1, 1, 54, 3, '#5fb0e0'); r(ox + 1, 15, 54, 3, '#e8d49a');
+      r(ox + 6, 8, 2, 7, 'G'); r(ox + 8, 10, 2, 5, 'g'); r(ox + 44, 6, 2, 9, 'G'); r(ox + 47, 9, 2, 6, 'L'); r(ox + 24, 13, 6, 2, 'S'); r(ox + 25, 12, 3, 1, 'l');
+      [[12 + f * 3, 6, 'o', 1], [32 - f * 3, 9, 'y', -1], [38 + f * 2, 4, 'R', 1], [18 - f * 2, 11, GOLD_HI, -1]].forEach(([x, y, c, d]) => {
+        r(ox + x, y, 3, 2, c); p(ox + x + (d > 0 ? -1 : 3), y, c); p(ox + x + (d > 0 ? 2 : 0), y, 'k');
+      });
+      p(ox + 21, 3 + f * 3, 'e'); p(ox + 22, 8 - f * 3, 'e'); p(ox + 41, 5 + f * 2, 'e');
+      r(ox + 1, 18, 54, 5, MAH_DKR); r(ox + 1, 18, 54, 1, GOLD); r(ox + 26, 20, 4, 1, GOLD);
+    });
+  });
+  const bar = () => paint(60, 26, (r, p) => {
+    [[6, 'c'], [14, '#7e1f2b'], [40, '#c8862e'], [50, 'c']].forEach(([x, c]) => { r(x, 0, 3, 4, 'k'); r(x + 1, 1, 1, 3, c); });
+    r(24, 1, 3, 3, '#2f6b34'); r(25, 0, 1, 1, '#2f6b34'); r(31, 2, 4, 2, GOLD_HI);
+    r(0, 4, 60, 6, 'k'); r(1, 5, 58, 4, '#efe9df'); r(1, 8, 58, 1, '#d6cdbd');
+    r(0, 10, 60, 15, 'k'); r(1, 10, 58, 14, MAH_DK); r(1, 12, 58, 1, GOLD);
+    [3, 17, 31, 45].forEach(x => { r(x, 14, 12, 8, VEL_DK); p(x + 3, 17, GOLD_HI); p(x + 8, 17, GOLD_HI); r(x, 14, 12, 1, VEL); });
+    r(1, 23, 58, 1, GOLD); r(1, 25, 59, 1, 'z');
+  });
+  const wineShelf = () => paint(60, 18, r => {
+    r(0, 0, 60, 18, 'k'); r(1, 1, 58, 16, MAH_DKR);
+    const cols = ['#2f6b34', '#7e1f2b', '#c8862e', '#cfe8f0', '#2f6b34', '#7e1f2b'];
+    [8, 16].forEach((y, s) => { for (let i = 0, x = 3; x < 56; i++, x += 4) { const c = cols[(i + s * 2) % cols.length]; r(x, y - 5, 2, 5, c); r(x, y - 6, 1, 1, c); } r(1, y, 58, 1, GOLD); });
+  });
+  const stool = () => paint(10, 12, (r, p, ctx, w, h) => {
+    r(2, 1, 6, 4, VEL); r(1, 2, 8, 2, VEL); r(3, 1, 3, 1, '#c8505a'); r(4, 5, 2, 4, GOLD); r(2, 9, 6, 1, GOLD_DK);
+    outline(ctx, w, h, 'k');
+  });
+  const piano = () => paint(40, 34, (r, p, ctx, w, h) => {
+    r(1, 1, 36, 22, '#1c1c24'); ctx.clearRect(30, 1, 7, 5); ctx.clearRect(33, 6, 4, 6); ctx.clearRect(35, 12, 2, 5);
+    r(5, 4, 22, 14, '#2a2a36'); r(5, 4, 22, 1, GOLD); for (let x = 7; x < 26; x += 3) r(x, 5, 1, 12, '#6a6a7a');
+    r(3, 2, 20, 1, '#4a4a5a');
+    r(1, 23, 30, 4, 'e'); for (let x = 2; x < 30; x += 4) { r(x, 23, 1, 2, '#1c1c24'); r(x + 2, 23, 1, 2, '#1c1c24'); }
+    r(9, 29, 14, 4, '#1c1c24'); r(10, 30, 12, 2, VEL_DK);
+    outline(ctx, w, h, 'k');
+  });
+  const luxSofaCanvas = () => {
+    const cv = document.createElement('canvas'); cv.width = 44; cv.height = 18; const c = cv.getContext('2d');
+    const r = (x, y, w, h, col_) => { c.fillStyle = col(col_); c.fillRect(x, y, w, h); };
+    r(0, 0, 44, 18, 'k'); r(1, 1, 42, 6, VEL_DK); [8, 15, 22, 29, 36].forEach(x => r(x, 3, 1, 1, GOLD_HI));
+    r(1, 1, 5, 15, VEL); r(38, 1, 5, 15, VEL); r(1, 1, 42, 1, '#c8505a');
+    r(6, 7, 16, 8, VEL); r(22, 7, 16, 8, VEL); r(22, 7, 1, 8, VEL_DKR); r(6, 7, 32, 1, '#c8505a'); r(6, 14, 32, 1, VEL_DK);
+    r(1, 16, 2, 2, GOLD); r(41, 16, 2, 2, GOLD);
+    return cv;
+  };
+  const rotated = (src, dir) => {
+    const cv = document.createElement('canvas'); cv.width = src.height; cv.height = src.width; const c = cv.getContext('2d');
+    c.translate(cv.width / 2, cv.height / 2); c.rotate(dir * Math.PI / 2); c.drawImage(src, -src.width / 2, -src.height / 2);
+    return cv.toDataURL();
+  };
+  const luxCoffee = () => paint(26, 14, (r, p) => {
+    r(0, 0, 26, 10, 'k'); r(1, 1, 24, 8, GOLD); r(2, 2, 22, 6, '#bfe6f2'); r(3, 3, 6, 1, 'e');
+    r(11, 3, 4, 4, '#2f6fb0'); p(12, 2, 'R'); p(13, 1, 'y'); p(14, 2, 'R'); p(11, 1, 'R'); p(13, 2, 'G');
+    r(1, 10, 2, 3, GOLD_DK); r(23, 10, 2, 3, GOLD_DK); r(3, 13, 20, 1, 'z');
+  });
+  const palm = () => paint(20, 32, (r, p, ctx, w, h) => {
+    r(3, 3, 6, 2, 'G'); r(11, 3, 6, 2, 'G'); r(1, 5, 4, 2, 'G'); r(15, 5, 4, 2, 'G'); r(5, 1, 3, 2, 'L'); r(12, 1, 3, 2, 'L');
+    r(2, 7, 3, 2, 'g'); r(15, 7, 3, 2, 'g'); r(7, 5, 6, 4, 'G'); r(8, 6, 2, 1, 'L');
+    r(9, 9, 2, 10, '#8a5a2a'); [11, 14, 17].forEach(y => r(9, y, 2, 1, '#6a3a1f'));
+    r(5, 19, 10, 2, GOLD_HI); r(6, 21, 8, 8, GOLD); r(6, 21, 2, 8, GOLD_HI); r(12, 21, 2, 8, GOLD_DK);
+    outline(ctx, w, h, 'k'); r(6, 31, 9, 1, 'z');
+  });
+  const chandelier = () => paint(26, 20, (r, p, ctx, w, h) => {
+    r(11, 8, 4, 4, GOLD); r(12, 9, 2, 2, GOLD_HI);
+    [[3, 9], [21, 9], [6, 3], [18, 3], [6, 15], [18, 15]].forEach(([x, y]) => {
+      const mx = (x + 12) >> 1, my = (y + 9) >> 1; r(mx, my, 2, 1, GOLD_DK); r(x, y, 3, 2, GOLD); p(x + 1, y - 1, '#ffe27a');
+    });
+    [[9, 5], [16, 5], [9, 14], [16, 14], [5, 9], [19, 12]].forEach(([x, y]) => p(x, y, '#c8eefa'));
+    outline(ctx, w, h, 'k');
+  });
+  const trophyCase = () => paint(28, 30, r => {
+    r(0, 0, 28, 30, 'k'); r(1, 1, 26, 28, MAH_DK); r(2, 2, 24, 25, '#3a5a70'); r(3, 3, 1, 22, '#5a7a90');
+    [10, 19, 27].forEach((y, s) => {
+      r(2, y, 24, 1, GOLD);
+      [5, 12, 19].forEach((x, i) => { if ((i + s) % 3 === 2 && s) { r(x, y - 3, 3, 3, GOLD_HI); r(x + 1, y - 4, 1, 1, VEL); return; }
+        r(x, y - 6, 4, 3, GOLD_HI); r(x + 1, y - 3, 2, 2, GOLD); r(x, y - 1, 4, 1, GOLD_DK); });
+    });
+  });
+  const bigPainting = () => paint(32, 22, (r, p) => {
+    r(0, 0, 32, 22, 'k'); r(1, 1, 30, 20, GOLD); r(1, 1, 30, 1, GOLD_HI); r(1, 20, 30, 1, GOLD_DK);
+    r(3, 3, 26, 16, '#f4a26a'); r(3, 3, 26, 5, '#e0705a'); r(18, 7, 4, 3, '#ffe27a'); r(17, 8, 6, 1, '#ffe27a');
+    r(3, 9, 9, 3, '#6a4a6a'); r(5, 8, 4, 1, '#6a4a6a'); r(3, 12, 26, 7, '#2f6fb0'); r(17, 13, 6, 1, '#ffe27a'); r(19, 15, 3, 1, '#f4c542'); r(6, 16, 5, 1, '#5f9bd8');
+  });
+  const globe = () => paint(14, 20, (r, p, ctx, w, h) => {
+    r(4, 1, 6, 10, '#2f6fb0'); r(2, 3, 10, 6, '#2f6fb0'); r(3, 2, 8, 8, '#2f6fb0');
+    r(4, 3, 3, 3, 'G'); r(8, 6, 3, 2, 'G'); r(5, 8, 2, 1, 'G'); p(4, 2, '#8fd6ea');
+    r(1, 5, 1, 4, GOLD); r(12, 4, 1, 4, GOLD); r(6, 11, 2, 5, GOLD_DK); r(3, 16, 8, 2, GOLD);
+    outline(ctx, w, h, 'k');
+  });
+  const poolTable = () => paint(60, 36, (r, p) => {
+    r(0, 0, 60, 34, 'k'); r(1, 1, 58, 32, MAH); r(1, 1, 58, 1, '#b5573c'); r(5, 5, 50, 24, '#2f7a4a'); r(5, 5, 50, 1, '#256a3e');
+    [[3, 3], [28, 2], [53, 3], [3, 27], [28, 28], [53, 27]].forEach(([x, y]) => r(x, y, 4, 4, '#111'));
+    [[38, 15, 'y'], [41, 13, 'R'], [41, 17, 'B'], [44, 11, 'u'], [44, 15, 'k'], [44, 19, 'o'], [16, 16, 'e']].forEach(([x, y, c]) => { r(x, y, 2, 2, c); p(x, y, '#ffffffaa'); });
+    for (let i = 0; i < 20; i++) p(2 + i, 25 - (i >> 1), i < 4 ? 'k' : '#e0b070');
+    r(2, 34, 4, 2, 'k'); r(54, 34, 4, 2, 'k'); [12, 24, 36, 48].forEach(x => p(x, 1, GOLD_HI));
+  });
+  const lounger = () => paint(12, 26, (r, p, ctx, w, h) => {
+    r(1, 1, 10, 24, '#e8e0d0'); for (let y = 2; y < 24; y += 4) r(2, y, 8, 2, '#3f7fb5'); r(2, 1, 8, 6, '#cfc6b4');
+    r(3, 14, 6, 6, '#f4ecd8'); r(3, 14, 6, 1, '#e0604f');
+    outline(ctx, w, h, 'k');
+  });
+  const parasol = () => paint(32, 32, (r, p, ctx, w, h) => {
+    for (let j = 0; j < 32; j++) for (let i = 0; i < 32; i++) {
+      const dx = i + .5 - 16, dy = j + .5 - 16, d = Math.hypot(dx, dy); if (d > 14.5) continue;
+      const sec = Math.floor((Math.atan2(dy, dx) + Math.PI) / (Math.PI / 4)) % 2;
+      p(i, j, sec ? (d > 12 ? '#c84a3e' : '#e0604f') : (d > 12 ? '#e0d8c4' : '#f4ecd8'));
+    }
+    r(15, 15, 2, 2, GOLD); outline(ctx, w, h, 'k');
+  });
+  const hotTub = () => paint(40, 40, (r, p, ctx, w, h) => {
+    for (let j = 0; j < 40; j++) for (let i = 0; i < 40; i++) {
+      const d = Math.hypot(i + .5 - 20, j + .5 - 20);
+      if (d <= 18.5) p(i, j, d > 15 ? (j < 20 ? '#efe9df' : '#d6cdbd') : (d > 14 ? '#2f86c4' : '#5fc0e0'));
+    }
+    [[14, 12], [22, 15], [18, 22], [26, 24], [12, 20], [24, 10], [16, 28]].forEach(([x, y]) => { p(x, y, 'e'); p(x + 1, y + 1, '#c8eefa'); });
+    outline(ctx, w, h, 'k');
+  });
+  const telescope = () => paint(16, 20, (r, p, ctx, w, h) => {
+    for (let i = 0; i < 9; i++) { r(3 + i, 9 - i, 3, 2, GOLD); } r(12, 0, 3, 3, GOLD_HI); r(3, 9, 3, 2, GOLD_DK);
+    r(7, 10, 1, 8, '#6a3a1f'); r(4, 17, 2, 2, '#6a3a1f'); r(10, 17, 2, 2, '#6a3a1f'); r(7, 17, 1, 2, '#6a3a1f');
+    outline(ctx, w, h, 'k');
+  });
+
   // ---- avatar heads: the seat's shape rasterized onto a 16x16 pixel grid ----------
   const HN = 16, U = 34 / HN, EYE = '#FFF6E8';
   const EYES = {
@@ -348,10 +527,31 @@
     's-sofa': sofa('#4f8a6e'), 's-coffee': coffeeTable(), 's-cooler': cooler(), 's-door': door(), 's-entrance': entrance(),
     't-concrete': concrete(), 't-studs': studs(), 's-scaffold': scaffold(), 's-lumber': lumber(), 's-bricks': bricks(),
     's-cone': cone(), 's-barricade': barricade(), 's-cement': cement(), 's-wheelbarrow': wheelbarrow(), 's-ladder': ladder(),
-    's-hardhat': hardhat(), 's-hammer': hammer(), 's-blueprint': blueprint()
+    's-hardhat': hardhat(), 's-hammer': hammer(), 's-blueprint': blueprint(),
+    't-marble': marble(), 't-lux-wall': luxWall(), 't-water': water(), 't-deck': planks('#b07a48'),
+    's-exec-desk': execDesk(), 's-throne': throne(), 's-fireplace': fireplace(), 's-aquarium': aquarium(), 's-bar': bar(),
+    's-wine': wineShelf(), 's-stool': stool(), 's-piano': piano(), 's-lux-coffee': luxCoffee(), 's-palm': palm(),
+    's-chandelier': chandelier(), 's-trophies': trophyCase(), 's-big-painting': bigPainting(), 's-globe': globe(),
+    's-pool-table': poolTable(), 's-lounger': lounger(), 's-parasol': parasol(), 's-hot-tub': hotTub(), 's-telescope': telescope()
   };
+  const sofaCv = luxSofaCanvas();
+  art['s-lux-sofa'] = sofaCv.toDataURL(); art['s-lux-sofa-l'] = rotated(sofaCv, -1); art['s-lux-sofa-r'] = rotated(sofaCv, 1);
+  // Pixel-file portraits (data/boss.json): {palette:{char:color}, pixels:[rows], outline?:color}. Max 24x24.
+  const pixelCache = new Map();
+  function pixelArt(def) {
+    if (!def || !Array.isArray(def.pixels) || !def.pixels.length || !def.palette) return null;
+    const key = JSON.stringify([def.pixels, def.palette, def.outline]);
+    if (pixelCache.has(key)) return pixelCache.get(key);
+    const rowsIn = def.pixels.slice(0, 24).map(r => [...String(r)].slice(0, 24));
+    const pad = def.outline ? 1 : 0, w = Math.max(...rowsIn.map(r => r.length)) + pad * 2, h = rowsIn.length + pad * 2;
+    const url = paint(w, h, (r, p, ctx) => {
+      rowsIn.forEach((row, j) => row.forEach((ch, i) => { const c = def.palette[ch]; if (c && ch !== '.') p(i + pad, j + pad, c); }));
+      if (def.outline) outline(ctx, w, h, def.outline);
+    });
+    const out = { url, w, h }; pixelCache.set(key, out); return out;
+  }
   const css = Object.entries(art).map(([k, v]) => `--${k}:url(${v});`).join('');
   const st = document.createElement('style'); st.textContent = `:root{${css}}`; document.head.appendChild(st);
 
-  global.Sprites = { head, wall, tint, shade };
+  global.Sprites = { head, wall, tint, shade, pixelArt };
 })(window);

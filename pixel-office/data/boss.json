@@ -1,0 +1,35 @@
+{
+  "name": "Boss",
+  "outline": "#1e140e",
+  "palette": {
+    "B": "#7c9cc4",
+    "L": "#a9c3e4",
+    "D": "#5b7aa3",
+    "E": "#fff6e8",
+    "G": "#f2c84a",
+    "R": "#c8323e",
+    "N": "#2a3550",
+    "n": "#3d4c70",
+    "W": "#f4ecd8",
+    "T": "#b8343b"
+  },
+  "pixels": [
+    "....G..GG..G....",
+    "....GG.GG.GG....",
+    "....GGGRRGGG....",
+    "..LLLLLLLLLLLL..",
+    ".BBBBBBBBBBBBDB.",
+    ".BBBBBBBBBBBBDB.",
+    ".BBBBEBBBBEBBDB.",
+    ".BBBBEBBBBEBBDB.",
+    ".BBBBEBBBBEBBDB.",
+    ".BBBBBBBBBBBBDB.",
+    ".BBBBBBBBBBBBDB.",
+    ".BBBBBBBBBBBBDB.",
+    ".NNNNNWTTWNNNNN.",
+    ".NNNNnNTTNnNNNN.",
+    ".NNNNnNTNNnNNNN.",
+    ".NNNNNNTNNNNNNN.",
+    "..NNNNNTNNNNNN.."
+  ]
+}
