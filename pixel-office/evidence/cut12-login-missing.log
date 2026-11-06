@@ -1,0 +1,5 @@
+# Login-missing: no session.json, pre-existing live file
+before: live exists=yes; session exists=no
+status-bridge: live status unavailable: not signed in (no session file). Run: python3 tools/status-bridge/login.py; removed data/status.live.json; the page will use mock status.
+exit=2
+after: live exists=no

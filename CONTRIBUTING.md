@@ -16,5 +16,6 @@
 
 ## Secrets
 
-- Never commit secrets, tokens, credentials, `.env` files, `data/status.live.json`, `data/boss.local.json`, or client config.
+- Never commit secrets, tokens, credentials, `.env` files, `data/status.live.json`, `data/boss.local.json`, `pixel-office/tools/status-bridge/session.json` (the status bridge sign-in tokens), or client config.
+- Do not paste tokens, session files, or bot/agent ids into issues, pull requests, docs, or test fixtures. Tests use synthetic ids.
 - Do not scrape or document unofficial client config paths, desktop logins, or local profile files as a status or appearance source.

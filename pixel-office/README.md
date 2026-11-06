@@ -1,6 +1,6 @@
 # Bot Office (`pixel-office/`)
 
-This directory is the interactive visualizer: a pure static HTML/CSS/JavaScript office with no frameworks or build step. There is no official browser-pollable status API; an optional local `grokbot` CLI bridge can write status for your own machine (see [Local status bridge](#local-status-bridge-optional)).
+This directory is the interactive visualizer: a pure static HTML/CSS/JavaScript office with no frameworks or build step. There is no official browser-pollable status API; an optional local status bridge can write status on your own machine (see [Local status bridge](#local-status-bridge-optional)).
 
 ## Run
 
@@ -18,11 +18,15 @@ xattr -d com.apple.quarantine stop-office.command
 
 You can optionally drag `start-office.command` to the Dock.
 
-The launcher starts `python3 -m http.server` from this folder (default URL http://127.0.0.1:8765/) and, if the `grokbot` CLI is on your PATH, `python3 tools/status-bridge/bridge.py` (15 second poll). It then opens the page in your browser. Finder-launched Terminal windows often have a thin PATH, so the script adds Homebrew locations and sources `~/.zprofile` / `~/.bash_profile` when they exist (**PATH only** — it never reads Grok Bot config files, tokens, or sessions).
+The launcher starts `python3 -m http.server` from this folder (default URL http://127.0.0.1:8765/) and the local status bridge `python3 tools/status-bridge/bridge.py` (15 second poll). It then opens the page in your browser. Finder-launched Terminal windows often have a thin PATH, so the script adds Homebrew locations and sources `~/.zprofile` / `~/.bash_profile` when they exist (**PATH only** — it never reads Grok Bot config files, tokens, or sessions).
 
-This is for your own machine and your own grokbot login. It is not for a public page. The grokbot CLI is undocumented and may change with the client.
+Live status needs a one-time sign-in on this machine (see [Local status bridge](#local-status-bridge-optional)):
 
-If `grokbot` is missing or the bridge fails, the page still opens and uses mock status. Log in to grokbot on this machine and run the launcher again to enable live status.
+```sh
+python3 tools/status-bridge/login.py
+```
+
+If you have not signed in, or the status query fails, the page still opens and uses mock status. The launcher prints a hint, and a bridge that is already running picks up a later sign-in on its next poll.
 
 If port 8765 is already serving HTTP, the launcher reuses it and says so. If something else is using 8765, it tries 8766, then 8767, then 8768, and prints the URL it chose.
 
@@ -40,10 +44,11 @@ python3 -m http.server 8765
 
 Open http://127.0.0.1:8765/ in a browser. HTTP is required for JSON fetches; `file://` will not work. Press **1–4** to switch floors, or click a floor button.
 
-Optional live status (own machine / own login):
+Optional live status (own machine, after the one-time sign-in):
 
 ```sh
-python3 tools/status-bridge/bridge.py
+python3 tools/status-bridge/login.py    # once
+python3 tools/status-bridge/bridge.py   # keep running next to the server
 ```
 
 ## Status
@@ -64,7 +69,7 @@ Details:
 - The page fetches `data/status.live.json` first and falls back to `data/status.mock.json` if it is missing or invalid; it re-fetches every 15 s.
 - The page only reads that JSON and never reads desktop logins, config folders, tokens, or sessions.
 
-There is **no** official browser-pollable status API. Live status needs your own machine and `grokbot status --json` via the bridge below. If the CLI is missing or the bridge fails, mock data is used.
+There is **no** official browser-pollable status API. Live status needs your own machine, a one-time sign-in, and the bridge below. If you are not signed in or the query fails, mock data is used.
 
 ## Organization and layout
 
@@ -92,7 +97,7 @@ Optional per-floor override: `layoutByFloor["<floor>"]` replaces any key of the 
 - `rugs`: gold-bordered burgundy rugs.
 - `props`: a list of `{type, x, y}` furniture in plan coordinates. The types are `fireplace`, `aquarium` (both animated), `big-painting`, `trophies`, `shelf`, `globe`, `lux-sofa`, `lux-sofa-l`, `lux-sofa-r`, `lux-coffee`, `bar`, `wine`, `stool`, `piano`, `pool-table`, `chandelier`, `palm`, `lounger`, `parasol`, `hot-tub` and `telescope`. Move or add furniture by editing this list.
 
-The Boss seat (`4F|exec|boss`) uses the `exec` desk style: a mahogany executive desk with twin monitors and a velvet throne chair. When the Boss is not working, they relax on the lounge sofas (`restSlots`). On the elevation, 4F is drawn as a glass penthouse storey whose window lights up when the Boss is working. Live status for the Boss uses the same local bridge as the other occupied seats.
+The Boss seat (`4F|exec|boss`) uses the `exec` desk style: a mahogany executive desk with twin monitors and a velvet throne chair. When the Boss is not working, they relax on the lounge sofas (`restSlots`). On the elevation, 4F is drawn as a glass penthouse storey whose window lights up when the Boss is working. The Boss seat has no bot binding, so the bridge never writes a record for it; with live status on, the Boss is shown as not working unless you edit a status file yourself.
 
 ## Design your own Boss selfie
 
@@ -155,18 +160,22 @@ The look is a cozy farm-sim office: wood-plank, stone, checker and cobblestone f
 
 ## Local status bridge (optional)
 
-`tools/status-bridge/bridge.py` (Python 3 stdlib only) runs **on your own machine with your own grokbot login**. It runs exactly `grokbot status --json`, maps agents to occupied seats via optional hidden seat bindings in `data/org.json` (an implementation detail; never displayed on the page), and writes only `{records:[{seatKey, working, source:"live", updatedAt}]}` to `data/status.live.json` (gitignored). Not for a public page. The CLI is undocumented and may change with the client.
-
-Mapping (case-insensitive; `_`/`-` treated as spaces): `running`, `background work` → working (desk); `awaiting you`, `idle`, anything unknown → not working (break area). Computer/asleep fields are ignored. Unmapped agents are ignored. If the CLI is missing, fails, or returns unusable JSON, the bridge exits non-zero and leaves the live file untouched.
+`tools/status-bridge/` (Python 3 stdlib only) runs **on your own machine**. It signs in with its own browser session, asks an **unpublished** backend for your bots and their status, maps them to occupied seats via optional hidden seat bindings in `data/org.json` (an implementation detail; never displayed on the page), and writes only `{records:[{seatKey, working, source:"live", updatedAt}]}` to `data/status.live.json` (gitignored). This is not an official API and may change at any time. Not for a public page.
 
 ```sh
-# 1. Log in to grokbot on your machine with the grokbot client (your own account).
-# 2. From the pixel-office folder:
+# From the pixel-office folder.
+# 1. One-time sign-in: opens your browser and waits until you finish signing in.
+python3 tools/status-bridge/login.py
+# 2. Run the bridge (start-office.command does this for you):
 python3 tools/status-bridge/bridge.py                 # poll every 15 s (--interval N)
-python3 tools/status-bridge/bridge.py --once          # single write
-python3 tools/status-bridge/bridge.py --from-fixture --once   # prove mapping without the CLI
-# 3. Serve the page:
-python3 -m http.server 8765
+python3 tools/status-bridge/bridge.py --once          # single poll; non-zero exit on failure
+python3 tools/status-bridge/bridge.py --from-fixture --once   # offline demo from fixture.json (no network)
+# 3. Offline tests (no network, no sign-in):
+python3 tools/status-bridge/test_bridge.py
 ```
 
-Delete `data/status.live.json` to return to mock data. Research notes: [docs/official-bot-api-research.md](docs/official-bot-api-research.md).
+- **Sign-in:** an independent session. The bridge never reads the desktop app's login, keychain entries, or config folders. Tokens are kept only in `tools/status-bridge/session.json` (mode `0600`, gitignored); the static page never reads them. Delete that file to sign out. Never commit it.
+- **Mapping:** awaiting you → not working (break area); running → working (desk); idle with background work (subagents or working tasks) → working (desk); idle → not working. Unmapped agents, vacant seats, and seats without a binding get no record.
+- **Failure:** if you are not signed in or a query fails, the bridge removes `data/status.live.json` so the page uses mock data, and prints the reason. It keeps polling, so signing in later starts live status without a restart.
+
+The fixture uses synthetic ids, so against the real `data/org.json` it writes zero records; the tests use a synthetic org. Delete `data/status.live.json` to return to mock data. Flow notes: [docs/connect-status-notes.md](docs/connect-status-notes.md). Research: [docs/official-bot-api-research.md](docs/official-bot-api-research.md).
