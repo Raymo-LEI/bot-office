@@ -1,7 +1,7 @@
 // Binary position: working=true means at desk; otherwise in the break area.
 (function (global) {
   const STATUS_URL = 'data/status.mock.json';
-  function seatKey(seat) { return `${seat.floor}|${seat.department}|${seat.title}`; }
+  function seatKey(seat) { return `${seat.floor}|${seat.department}|${seat.id || seat.title}`; }
   function loadStatus(url) {
     return fetch(url || STATUS_URL).then(r => { if (!r.ok) throw new Error('status fetch ' + r.status); return r.json(); })
       .then(file => { const map = new Map(); (Array.isArray(file) ? file : (file.records || [])).forEach(r => { if (r && r.seatKey) map.set(r.seatKey, r); }); return map; });

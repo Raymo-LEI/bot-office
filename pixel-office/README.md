@@ -5,7 +5,7 @@ A pure static HTML/CSS/JavaScript office: no frameworks, build step, or live sta
 ## Run locally
 
 ```sh
-cd pixel-office
+cd /workspace/bot-office/pixel-office
 python3 -m http.server 8765
 ```
 
@@ -24,6 +24,8 @@ Departments use `{id, name, color}`. Their color is a rug and wall-trim accent, 
 ## Binary status
 
 - Schema: `data/status.schema.json`, shaped as `{"records":[{seatKey, working, source, updatedAt}]}`. `state: "working" | "away"` is also accepted.
+- Seat key: `floor|department|id` when a seat has an optional `id` (used for the 1F Open desks, e.g. `1F|optics|optics-1`); otherwise `floor|department|title`.
+- Per-floor layout: `layoutByFloor["1F"]` overrides the shared `layout` (width, height, core, corridor, lobby, rest, restSlots, rooms, deskSlots). 1F has 12 desks (4 per department); 3F/2F use the shared 640×400 layout.
 - Mock data: `data/status.mock.json`. A seat key is `floor|department|title`; the two Open keys are `1F|optics|Open` and `1F|office|Open`.
 - Loader: `js/status.js` exposes `window.StatusAPI` (`STATUS_URL`, `loadStatus`, `seatKey`, `isWorking`).
 - `working: true` places a person at their computer desk.

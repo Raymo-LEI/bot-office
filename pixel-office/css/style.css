@@ -7,7 +7,7 @@ h1,h2{font-size:16px;letter-spacing:1px}main{display:flex;gap:24px;flex-wrap:wra
 .storey{display:flex;height:70px;border-bottom:4px solid #000;cursor:pointer;opacity:.55;position:relative}
 .storey.on{opacity:1;outline:3px solid #ffd34d;outline-offset:-3px}
 .storey .tag{position:absolute;left:-44px;top:24px;width:40px;font-size:12px;text-align:right}
-.bay{flex:1;border-right:2px solid #000;image-rendering:pixelated;padding:4px;font-size:12px;color:#111;font-weight:bold;display:flex;align-items:center;justify-content:center;gap:4px;filter:brightness(1.05)}
+.bay{flex:1;border-right:2px solid #000;image-rendering:pixelated;padding:4px;font-size:12px;color:#111;font-weight:bold;display:flex;align-items:center;justify-content:center;gap:2px;flex-wrap:wrap;line-height:1;filter:brightness(1.05)}
 .core{flex:0 0 36px;background:repeating-linear-gradient(0deg,#444 0 6px,#555 6px 12px);border-right:2px solid #000;font-size:9px;color:#fff;writing-mode:vertical-rl;text-align:center}
 .ground{height:14px;background:#3f7a3a;border-top:4px solid #000}
 #legend{margin-top:14px;font-size:12px;max-width:640px;line-height:1.7}#legend span{display:inline-block;width:12px;height:12px;border:2px solid #000;margin:0 4px 0 12px;vertical-align:middle}

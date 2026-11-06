@@ -83,13 +83,78 @@
     },
     {
       "floor": "1F",
+      "department": "painting",
+      "id": "painting-2",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "painting",
+      "id": "painting-3",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "painting",
+      "id": "painting-4",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
       "department": "optics",
+      "id": "optics-1",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "optics",
+      "id": "optics-2",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "optics",
+      "id": "optics-3",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "optics",
+      "id": "optics-4",
       "title": "Open",
       "vacant": true
     },
     {
       "floor": "1F",
       "department": "office",
+      "id": "office-1",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "office",
+      "id": "office-2",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "office",
+      "id": "office-3",
+      "title": "Open",
+      "vacant": true
+    },
+    {
+      "floor": "1F",
+      "department": "office",
+      "id": "office-4",
       "title": "Open",
       "vacant": true
     }
@@ -214,5 +279,168 @@
         "y": 310
       }
     ]
+  },
+  "layoutByFloor": {
+    "1F": {
+      "width": 820,
+      "height": 570,
+      "core": {
+        "x": 0,
+        "y": 180,
+        "w": 72,
+        "h": 250,
+        "label": "Elevator/Stairs"
+      },
+      "corridor": {
+        "x": 72,
+        "y": 260,
+        "w": 748,
+        "h": 50,
+        "label": "Corridor"
+      },
+      "lobby": {
+        "x": 72,
+        "y": 310,
+        "w": 170,
+        "h": 260,
+        "label": "Lobby"
+      },
+      "rooms": [
+        {
+          "id": "optics",
+          "department": "optics",
+          "x": 72,
+          "y": 0,
+          "w": 370,
+          "h": 260,
+          "label": "Optics"
+        },
+        {
+          "id": "painting",
+          "department": "painting",
+          "x": 442,
+          "y": 0,
+          "w": 378,
+          "h": 260,
+          "label": "Painting"
+        },
+        {
+          "id": "office",
+          "department": "office",
+          "x": 242,
+          "y": 310,
+          "w": 370,
+          "h": 260,
+          "label": "Office"
+        }
+      ],
+      "deskSlots": [
+        {
+          "department": "optics",
+          "x": 90,
+          "y": 42,
+          "facing": "S"
+        },
+        {
+          "department": "optics",
+          "x": 224,
+          "y": 42,
+          "facing": "S"
+        },
+        {
+          "department": "optics",
+          "x": 90,
+          "y": 158,
+          "facing": "S"
+        },
+        {
+          "department": "optics",
+          "x": 224,
+          "y": 158,
+          "facing": "S"
+        },
+        {
+          "department": "painting",
+          "x": 460,
+          "y": 42,
+          "facing": "S"
+        },
+        {
+          "department": "painting",
+          "x": 598,
+          "y": 42,
+          "facing": "S"
+        },
+        {
+          "department": "painting",
+          "x": 460,
+          "y": 158,
+          "facing": "S"
+        },
+        {
+          "department": "painting",
+          "x": 598,
+          "y": 158,
+          "facing": "S"
+        },
+        {
+          "department": "office",
+          "x": 260,
+          "y": 332,
+          "facing": "N"
+        },
+        {
+          "department": "office",
+          "x": 394,
+          "y": 332,
+          "facing": "N"
+        },
+        {
+          "department": "office",
+          "x": 260,
+          "y": 448,
+          "facing": "N"
+        },
+        {
+          "department": "office",
+          "x": 394,
+          "y": 448,
+          "facing": "N"
+        }
+      ],
+      "rest": {
+        "x": 612,
+        "y": 310,
+        "w": 208,
+        "h": 260,
+        "label": "Break area"
+      },
+      "restSlots": [
+        {
+          "x": 650,
+          "y": 340
+        },
+        {
+          "x": 650,
+          "y": 390
+        },
+        {
+          "x": 650,
+          "y": 440
+        },
+        {
+          "x": 650,
+          "y": 490
+        },
+        {
+          "x": 720,
+          "y": 420
+        },
+        {
+          "x": 770,
+          "y": 420
+        }
+      ]
+    }
   }
 }

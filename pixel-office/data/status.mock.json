@@ -43,13 +43,67 @@
       "updatedAt": "2026-11-06T02:00:00+09:00"
     },
     {
-      "seatKey": "1F|optics|Open",
+      "seatKey": "1F|optics|optics-1",
       "working": false,
       "source": "mock",
       "updatedAt": "2026-11-06T02:00:00+09:00"
     },
     {
-      "seatKey": "1F|office|Open",
+      "seatKey": "1F|office|office-1",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|painting|painting-2",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|painting|painting-3",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|painting|painting-4",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|optics|optics-2",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|optics|optics-3",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|optics|optics-4",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|office|office-2",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|office|office-3",
+      "working": false,
+      "source": "mock",
+      "updatedAt": "2026-11-06T02:00:00+09:00"
+    },
+    {
+      "seatKey": "1F|office|office-4",
       "working": false,
       "source": "mock",
       "updatedAt": "2026-11-06T02:00:00+09:00"

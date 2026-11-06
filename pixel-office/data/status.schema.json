@@ -22,7 +22,7 @@
       "properties": {
         "seatKey": {
           "type": "string",
-          "description": "floor|department|title"
+          "description": "floor|department|id when the seat has an optional id (e.g. 1F|optics|optics-1), otherwise floor|department|title."
         },
         "working": {
           "type": "boolean",

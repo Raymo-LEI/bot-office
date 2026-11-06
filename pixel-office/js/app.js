@@ -65,8 +65,9 @@ function personHTML(seat, color, x, y, where) {
     `<em>${esc(seat.title)}</em></div>`;
 }
 
+function floorLayout() { return Object.assign({}, org.layout, (org.layoutByFloor && org.layoutByFloor[cur]) || {}); }
 function planHTML(groups) {
-  const L = org.layout, dm = Object.fromEntries(org.departments.map(d => [d.id, d]));
+  const L = floorLayout(), dm = Object.fromEntries(org.departments.map(d => [d.id, d]));
   let h = R(L.corridor, 'p-corr', '', `<span>${esc(L.corridor.label||'')}</span>`) +
     R(L.core, 'p-core', '', `<span>${esc(L.core.label)}</span>`) +
     R(L.lobby, 'p-lobby', '', `<span class="area-label">${esc(L.lobby.label)}</span><i class="rec"><i class="rec-screen"></i><i class="rec-book"></i></i><i class="plant lobby-plant"></i><i class="entry-mat"></i>`);
@@ -118,7 +119,7 @@ function render() {
       }).join(' ')}</div>`).join('') + '</div>').join('') + '<div class="ground"></div>';
   const fl = org.floors.find(f => f.id === cur);
   $('#planTitle').textContent = `Plan · ${fl.id} ${fl.label}`;
-  $('#plan').style.width = org.layout.width+'px'; $('#plan').style.height = org.layout.height+'px';
+  { const FL = floorLayout(); $("#plan").style.width = FL.width+"px"; $("#plan").style.height = FL.height+"px"; }
   $('#plan').innerHTML = planHTML(groups);
   $('#legend').innerHTML = org.departments.map(d => `<span style="background:${d.color}"></span>${esc(d.name)}`).join('') +
     ((org.groups||[]).length ? ' · Groups: ' + org.groups.map(g => esc(g.name)).join(', ') : '') +
