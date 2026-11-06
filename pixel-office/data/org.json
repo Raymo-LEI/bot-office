@@ -167,27 +167,27 @@
     }
   ],
   "layout": {
-    "width": 640,
-    "height": 400,
+    "width": 1100,
+    "height": 640,
     "core": {
       "x": 0,
-      "y": 110,
+      "y": 220,
       "w": 72,
-      "h": 180,
+      "h": 240,
       "label": "Elevator/Stairs"
     },
     "corridor": {
       "x": 72,
-      "y": 170,
-      "w": 568,
+      "y": 290,
+      "w": 760,
       "h": 56,
       "label": "Corridor"
     },
     "lobby": {
       "x": 72,
-      "y": 226,
-      "w": 150,
-      "h": 174,
+      "y": 346,
+      "w": 180,
+      "h": 294,
       "label": "Lobby"
     },
     "rooms": [
@@ -196,258 +196,197 @@
         "department": "optics",
         "x": 72,
         "y": 0,
-        "w": 300,
-        "h": 170,
+        "w": 380,
+        "h": 290,
         "label": "Optics"
       },
       {
         "id": "painting",
         "department": "painting",
-        "x": 372,
+        "x": 452,
         "y": 0,
-        "w": 268,
-        "h": 170,
+        "w": 380,
+        "h": 290,
         "label": "Painting"
       },
       {
         "id": "office",
         "department": "office",
-        "x": 222,
-        "y": 226,
-        "w": 290,
-        "h": 174,
+        "x": 252,
+        "y": 346,
+        "w": 380,
+        "h": 294,
         "label": "Office"
       }
     ],
     "deskSlots": [
       {
         "department": "optics",
-        "x": 110,
-        "y": 40,
+        "x": 98,
+        "y": 60,
         "facing": "S"
       },
       {
         "department": "optics",
-        "x": 240,
-        "y": 40,
+        "x": 98,
+        "y": 176,
+        "facing": "S"
+      },
+      {
+        "department": "optics",
+        "x": 214,
+        "y": 60,
+        "facing": "S"
+      },
+      {
+        "department": "optics",
+        "x": 214,
+        "y": 176,
+        "facing": "S"
+      },
+      {
+        "department": "optics",
+        "x": 330,
+        "y": 60,
+        "facing": "S"
+      },
+      {
+        "department": "optics",
+        "x": 330,
+        "y": 176,
         "facing": "S"
       },
       {
         "department": "painting",
-        "x": 410,
-        "y": 40,
+        "x": 478,
+        "y": 60,
         "facing": "S"
       },
       {
         "department": "painting",
-        "x": 530,
-        "y": 40,
+        "x": 478,
+        "y": 176,
+        "facing": "S"
+      },
+      {
+        "department": "painting",
+        "x": 594,
+        "y": 60,
+        "facing": "S"
+      },
+      {
+        "department": "painting",
+        "x": 594,
+        "y": 176,
+        "facing": "S"
+      },
+      {
+        "department": "painting",
+        "x": 710,
+        "y": 60,
+        "facing": "S"
+      },
+      {
+        "department": "painting",
+        "x": 710,
+        "y": 176,
         "facing": "S"
       },
       {
         "department": "office",
-        "x": 250,
-        "y": 290,
+        "x": 278,
+        "y": 410,
         "facing": "N"
       },
       {
         "department": "office",
-        "x": 380,
-        "y": 290,
+        "x": 278,
+        "y": 526,
+        "facing": "N"
+      },
+      {
+        "department": "office",
+        "x": 394,
+        "y": 410,
+        "facing": "N"
+      },
+      {
+        "department": "office",
+        "x": 394,
+        "y": 526,
+        "facing": "N"
+      },
+      {
+        "department": "office",
+        "x": 510,
+        "y": 410,
+        "facing": "N"
+      },
+      {
+        "department": "office",
+        "x": 510,
+        "y": 526,
         "facing": "N"
       }
     ],
     "rest": {
-      "x": 512,
-      "y": 226,
-      "w": 128,
-      "h": 174,
+      "x": 632,
+      "y": 346,
+      "w": 200,
+      "h": 294,
       "label": "Break area"
     },
     "restSlots": [
       {
-        "x": 548,
-        "y": 248
+        "x": 668,
+        "y": 394
       },
       {
-        "x": 548,
-        "y": 292
+        "x": 756,
+        "y": 394
       },
       {
-        "x": 548,
-        "y": 336
+        "x": 668,
+        "y": 440
       },
       {
-        "x": 548,
-        "y": 368
+        "x": 756,
+        "y": 440
       },
       {
-        "x": 590,
-        "y": 310
+        "x": 668,
+        "y": 486
+      },
+      {
+        "x": 756,
+        "y": 486
+      },
+      {
+        "x": 668,
+        "y": 532
+      },
+      {
+        "x": 756,
+        "y": 532
+      },
+      {
+        "x": 668,
+        "y": 578
+      },
+      {
+        "x": 756,
+        "y": 578
+      }
+    ],
+    "construction": [
+      {
+        "x": 832,
+        "y": 0,
+        "w": 268,
+        "h": 640,
+        "label": "East wing",
+        "note": "Under construction"
       }
     ]
-  },
-  "layoutByFloor": {
-    "1F": {
-      "width": 820,
-      "height": 570,
-      "core": {
-        "x": 0,
-        "y": 180,
-        "w": 72,
-        "h": 250,
-        "label": "Elevator/Stairs"
-      },
-      "corridor": {
-        "x": 72,
-        "y": 260,
-        "w": 748,
-        "h": 50,
-        "label": "Corridor"
-      },
-      "lobby": {
-        "x": 72,
-        "y": 310,
-        "w": 170,
-        "h": 260,
-        "label": "Lobby"
-      },
-      "rooms": [
-        {
-          "id": "optics",
-          "department": "optics",
-          "x": 72,
-          "y": 0,
-          "w": 370,
-          "h": 260,
-          "label": "Optics"
-        },
-        {
-          "id": "painting",
-          "department": "painting",
-          "x": 442,
-          "y": 0,
-          "w": 378,
-          "h": 260,
-          "label": "Painting"
-        },
-        {
-          "id": "office",
-          "department": "office",
-          "x": 242,
-          "y": 310,
-          "w": 370,
-          "h": 260,
-          "label": "Office"
-        }
-      ],
-      "deskSlots": [
-        {
-          "department": "optics",
-          "x": 90,
-          "y": 42,
-          "facing": "S"
-        },
-        {
-          "department": "optics",
-          "x": 224,
-          "y": 42,
-          "facing": "S"
-        },
-        {
-          "department": "optics",
-          "x": 90,
-          "y": 158,
-          "facing": "S"
-        },
-        {
-          "department": "optics",
-          "x": 224,
-          "y": 158,
-          "facing": "S"
-        },
-        {
-          "department": "painting",
-          "x": 460,
-          "y": 42,
-          "facing": "S"
-        },
-        {
-          "department": "painting",
-          "x": 598,
-          "y": 42,
-          "facing": "S"
-        },
-        {
-          "department": "painting",
-          "x": 460,
-          "y": 158,
-          "facing": "S"
-        },
-        {
-          "department": "painting",
-          "x": 598,
-          "y": 158,
-          "facing": "S"
-        },
-        {
-          "department": "office",
-          "x": 260,
-          "y": 332,
-          "facing": "N"
-        },
-        {
-          "department": "office",
-          "x": 394,
-          "y": 332,
-          "facing": "N"
-        },
-        {
-          "department": "office",
-          "x": 260,
-          "y": 448,
-          "facing": "N"
-        },
-        {
-          "department": "office",
-          "x": 394,
-          "y": 448,
-          "facing": "N"
-        }
-      ],
-      "rest": {
-        "x": 612,
-        "y": 310,
-        "w": 208,
-        "h": 260,
-        "label": "Break area"
-      },
-      "restSlots": [
-        {
-          "x": 650,
-          "y": 340
-        },
-        {
-          "x": 650,
-          "y": 390
-        },
-        {
-          "x": 650,
-          "y": 440
-        },
-        {
-          "x": 650,
-          "y": 490
-        },
-        {
-          "x": 720,
-          "y": 420
-        },
-        {
-          "x": 770,
-          "y": 420
-        }
-      ]
-    }
   }
 }
