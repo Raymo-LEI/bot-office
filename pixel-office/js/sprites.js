@@ -190,6 +190,83 @@
     r(0, 0, 14, 20, 'k'); r(1, 1, 12, 19, 'w'); r(2, 2, 10, 7, 'W'); r(2, 11, 10, 8, 'W'); r(2, 2, 10, 1, 'h'); r(2, 11, 10, 1, 'h'); r(10, 10, 2, 2, 'y');
   });
 
+  const entrance = () => paint(26, 8, r => {
+    r(0, 0, 26, 8, 'k'); r(1, 1, 11, 6, '#9fdcf0'); r(14, 1, 11, 6, '#9fdcf0'); r(1, 1, 11, 2, '#c8eefa'); r(14, 1, 11, 2, '#c8eefa');
+    r(12, 0, 2, 8, 'S'); r(10, 3, 1, 2, 'y'); r(15, 3, 1, 2, 'y');
+  });
+
+  // ---- construction wing ------------------------------------------------------
+  const concrete = () => paint(16, 16, (r, p) => {
+    r(0, 0, 16, 16, '#aaa596');
+    [[2, 3], [9, 1], [13, 7], [5, 11], [11, 13], [1, 14], [7, 6]].forEach(([x, y]) => p(x, y, '#8f8a7c'));
+    [[4, 1], [12, 4], [8, 9], [2, 8], [14, 12]].forEach(([x, y]) => p(x, y, '#c2bdae'));
+    p(9, 10, '#7d786b'); p(10, 11, '#7d786b'); p(10, 12, '#7d786b'); p(11, 12, '#7d786b');
+  });
+  const studs = () => paint(16, 22, r => {
+    r(0, 0, 16, 22, '#e7a3a6'); r(0, 4, 16, 1, '#d48a8f'); r(0, 11, 16, 1, '#d48a8f'); r(0, 17, 16, 1, '#d48a8f');
+    r(3, 7, 2, 1, '#f3c2c3'); r(11, 14, 2, 1, '#f3c2c3');
+    r(7, 0, 3, 22, 'W'); r(7, 0, 1, 22, 'h'); r(9, 0, 1, 22, 'w');
+    r(0, 0, 16, 2, 'W'); r(0, 0, 16, 1, 'h'); r(0, 19, 16, 3, 'w'); r(0, 19, 16, 1, 'W'); r(0, 21, 16, 1, 'd');
+  });
+  const scaffold = () => paint(32, 44, r => {
+    [1, 28].forEach(x => { r(x, 0, 3, 44, 'k'); r(x + 1, 0, 1, 44, 'l'); });
+    [3, 23].forEach(y => { r(1, y, 30, 2, 's'); r(1, y, 30, 1, 'S'); });
+    for (let i = 0; i < 18; i++) { r(4 + i * 1.33 | 0, 5 + i, 2, 1, 's'); r(4 + i * 1.33 | 0, 25 + i, 2, 1, 's'); }
+    [[0, 19], [0, 39]].forEach(([x, y]) => { r(x, y, 32, 4, 'k'); r(x + 1, y + 1, 30, 2, 'W'); r(x + 1, y + 1, 30, 1, 'h'); r(10, y + 1, 1, 2, 'd'); r(21, y + 1, 1, 2, 'd'); });
+  });
+  const lumber = () => paint(30, 14, (r, p, ctx, w, h) => {
+    [[1, 9], [3, 5], [2, 1]].forEach(([x, y]) => { r(x, y, 26, 4, 'W'); r(x, y, 26, 1, 'h'); r(x, y + 3, 26, 1, 'w'); r(x, y, 2, 4, 'P'); p(x, y + 1, 'w'); });
+    outline(ctx, w, h, 'k');
+  });
+  const bricks = () => paint(22, 16, (r, p, ctx, w, h) => {
+    r(1, 12, 20, 3, 'w'); r(1, 12, 20, 1, 'W'); r(4, 14, 2, 1, 'd'); r(16, 14, 2, 1, 'd');
+    for (let row = 0; row < 3; row++) for (let i = 0; i < 4; i++) {
+      const x = 1 + i * 5 + (row % 2 ? 2 : 0), y = 9 - row * 4; if (x + 4 > 21) continue;
+      r(x, y, 4, 3, 'r'); r(x, y, 4, 1, 'R');
+    }
+    outline(ctx, w, h, 'k');
+  });
+  const cone = () => paint(12, 14, (r, p, ctx, w, h) => {
+    r(5, 1, 2, 2, 'o'); r(4, 3, 4, 3, 'e'); r(4, 6, 4, 2, 'o'); r(3, 8, 6, 2, 'e'); r(3, 10, 6, 1, 'o'); p(5, 4, '#ffffff');
+    r(1, 11, 10, 2, '#c95f1a');
+    outline(ctx, w, h, 'k');
+  });
+  const barricade = () => paint(32, 16, (r, p, ctx, w, h) => {
+    for (let x = 1; x < 31; x++) r(x, 2, 1, 4, ((x >> 2) % 2) ? 'e' : 'o');
+    r(1, 2, 30, 1, '#ffd08a');
+    r(4, 6, 2, 8, 'S'); r(26, 6, 2, 8, 'S'); r(2, 13, 6, 1, 's'); r(24, 13, 6, 1, 's');
+    r(14, 0, 4, 2, 'y');
+    outline(ctx, w, h, 'k');
+  });
+  const cement = () => paint(20, 12, (r, p, ctx, w, h) => {
+    r(1, 5, 18, 6, 'P'); r(1, 5, 18, 1, 'p'); r(3, 1, 14, 5, 'p'); r(3, 1, 14, 1, 'e'); r(6, 3, 8, 1, 'S'); r(5, 8, 10, 1, 'S');
+    outline(ctx, w, h, 'k');
+  });
+  const wheelbarrow = () => paint(26, 16, (r, p, ctx, w, h) => {
+    r(3, 3, 16, 6, 'G'); r(3, 3, 16, 1, 'L'); r(5, 2, 12, 2, 'P'); r(6, 1, 8, 1, 'p');
+    r(19, 5, 6, 1, 'S'); r(21, 7, 4, 1, 'S');
+    r(2, 10, 5, 5, 's'); r(3, 11, 3, 3, 'S'); r(14, 9, 2, 5, 'S');
+    outline(ctx, w, h, 'k');
+  });
+  const ladder = () => paint(12, 36, (r, p, ctx, w, h) => {
+    r(1, 1, 2, 34, 'W'); r(9, 1, 2, 34, 'W'); r(1, 1, 1, 34, 'h'); r(9, 1, 1, 34, 'h');
+    for (let y = 4; y < 34; y += 5) r(3, y, 6, 1, 'w');
+    outline(ctx, w, h, 'k');
+  });
+  const hardhat = () => paint(18, 9, (r, p, ctx, w, h) => {
+    r(4, 1, 10, 2, 'y'); r(3, 2, 12, 4, 'y'); r(1, 6, 16, 2, '#d9a520'); r(5, 2, 3, 1, '#fff0a0'); r(8, 1, 2, 5, '#e8b52a');
+    outline(ctx, w, h, 'k');
+  });
+  const hammer = () => paint(10, 12, (r, p, ctx, w, h) => {
+    r(1, 1, 8, 3, 'S'); r(1, 1, 8, 1, 'l'); r(4, 4, 2, 7, 'W'); r(4, 4, 1, 7, 'h');
+    outline(ctx, w, h, 'k');
+  });
+  const blueprint = () => paint(18, 12, (r, p, ctx, w, h) => {
+    r(1, 1, 16, 10, '#2f6fb0'); r(1, 1, 16, 1, '#5f9bd8');
+    r(3, 3, 6, 5, '#c8e4ff'); r(4, 4, 4, 3, '#2f6fb0'); r(11, 3, 4, 1, '#c8e4ff'); r(11, 5, 3, 1, '#c8e4ff'); r(11, 7, 4, 1, '#c8e4ff');
+    outline(ctx, w, h, 'k');
+  });
+
   // ---- avatar heads: the seat's shape rasterized onto a 16x16 pixel grid ----------
   const HN = 16, U = 34 / HN, EYE = '#FFF6E8';
   const EYES = {
@@ -219,8 +296,10 @@
     const q = circ(16, 16, 14); return (x, y) => ctx.isPointInPath(q, x, y);
   }
   const headCache = new Map();
-  function head(shape, color) {
-    const key = shape + '|' + color;
+  // outfit: {kind:'shirt', color, tie} or {kind:'vest'} — clothes are painted onto the lower rows of the shape.
+  const CLOTH_TOP = 10;
+  function head(shape, color, outfit) {
+    const key = shape + '|' + color + '|' + JSON.stringify(outfit || null);
     if (headCache.has(key)) return headCache.get(key);
     const tc = document.createElement('canvas').getContext('2d');
     const inside = shapeTest(shape, tc);
@@ -228,12 +307,29 @@
     for (let j = 0; j < HN; j++) { m[j] = []; for (let i = 0; i < HN; i++) m[j][i] = inside((i + .5) * U, (j + .5) * U); }
     const at = (i, j) => j >= 0 && i >= 0 && j < HN && i < HN && m[j][i];
     const fill = toHex(hex(color)), dark = shade(fill, .3), hi = tint(fill, .4), line = shade(fill, .65);
+    const cloth = outfit ? (outfit.kind === 'vest' ? '#e0862f' : toHex(hex(outfit.color || '#4a6f8a'))) : null;
     const url = paint(HN, HN, (r, p) => {
       for (let j = 0; j < HN; j++) for (let i = 0; i < HN; i++) {
-        if (at(i, j)) p(i, j, !at(i, j + 1) || !at(i, j + 2) && !at(i + 1, j + 1) ? dark : (!at(i, j - 1) && i < 9) ? hi : fill);
+        const rim = !at(i, j + 1) || !at(i, j + 2) && !at(i + 1, j + 1);
+        if (at(i, j) && cloth && j >= CLOTH_TOP) p(i, j, rim ? shade(cloth, .3) : (!at(i - 1, j) ? tint(cloth, .2) : cloth));
+        else if (at(i, j)) p(i, j, rim ? dark : (!at(i, j - 1) && i < 9) ? hi : fill);
         else if (at(i - 1, j) || at(i + 1, j) || at(i, j - 1) || at(i, j + 1)) p(i, j, line);
       }
       (EYES[shape] || EYES.blob).forEach(([x, y, w, h]) => r(x, y, w, h, EYE));
+      if (!cloth) return;
+      const row = []; for (let i = 0; i < HN; i++) if (at(i, CLOTH_TOP)) row.push(i);
+      if (!row.length) return;
+      const cx = Math.round((row[0] + row[row.length - 1] + 1) / 2); // seam between cx-1 and cx
+      const put = (i, j, c) => { if (at(i, j)) p(i, j, c); };
+      if (outfit.kind === 'vest') {
+        for (let j = CLOTH_TOP; j < HN; j++) { put(cx - 1, j, '#c3ccd3'); put(cx, j, '#9aa6b0'); }
+        for (let i = 0; i < HN; i++) if (i < cx - 1 || i > cx) put(i, CLOTH_TOP + 1, '#f4e04a');
+      } else {
+        const tie = outfit.tie || '#b8343b';
+        [cx - 2, cx + 1].forEach(i => put(i, CLOTH_TOP, '#f4ecd8'));
+        put(cx - 1, CLOTH_TOP, tie); put(cx, CLOTH_TOP, tie);
+        for (let j = CLOTH_TOP + 1; j < HN; j++) { put(cx - 1, j, tie); if (j < CLOTH_TOP + 3) put(cx, j, shade(tie, .2)); }
+      }
     });
     headCache.set(key, url); return url;
   }
@@ -249,7 +345,10 @@
     't-stairs': stairs(), 't-grass': grass(), 't-wall-rest': wallpaper('#6fae8a'), 't-wall-lobby': wallpaper('#c9774e'),
     's-desk': desk(true), 's-desk-off': desk(false), 's-chair': chair('#4f7a63'), 's-window': windowS(),
     's-painting': painting(), 's-clock': clock(), 's-shelf': bookshelf(), 's-plant': plant(), 's-counter': counter(),
-    's-sofa': sofa('#4f8a6e'), 's-coffee': coffeeTable(), 's-cooler': cooler(), 's-door': door()
+    's-sofa': sofa('#4f8a6e'), 's-coffee': coffeeTable(), 's-cooler': cooler(), 's-door': door(), 's-entrance': entrance(),
+    't-concrete': concrete(), 't-studs': studs(), 's-scaffold': scaffold(), 's-lumber': lumber(), 's-bricks': bricks(),
+    's-cone': cone(), 's-barricade': barricade(), 's-cement': cement(), 's-wheelbarrow': wheelbarrow(), 's-ladder': ladder(),
+    's-hardhat': hardhat(), 's-hammer': hammer(), 's-blueprint': blueprint()
   };
   const css = Object.entries(art).map(([k, v]) => `--${k}:url(${v});`).join('');
   const st = document.createElement('style'); st.textContent = `:root{${css}}`; document.head.appendChild(st);

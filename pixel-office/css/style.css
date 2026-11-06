@@ -13,7 +13,7 @@ h1{margin:0;font-size:22px;font-weight:600;letter-spacing:1px;color:#fff3cf;padd
 h2{margin:0 0 12px;font-size:15px;font-weight:600;color:var(--wood-dk);letter-spacing:.5px}
 .hint{margin:0;font-size:13px;color:#fff3cf;text-shadow:1px 1px 0 #2f5a1e,-1px 0 0 #2f5a1e,0 -1px 0 #2f5a1e,1px 0 0 #2f5a1e}
 main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
-.panel{background:var(--parch);padding:14px 18px 16px;border:4px solid var(--ink);border-radius:6px;
+.panel{max-width:100%;overflow-x:auto;background:var(--parch);padding:14px 18px 16px;border:4px solid var(--ink);border-radius:6px;
   box-shadow:inset 0 0 0 4px var(--wood-lt),inset 0 0 0 7px var(--wood),inset 0 0 0 9px var(--parch-dk),0 6px 0 rgba(30,18,8,.45)}
 
 #switch{display:flex;gap:8px}
@@ -24,7 +24,7 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 #switch button.on{background:var(--gold);color:var(--text);text-shadow:1px 1px 0 #fff4b8;box-shadow:inset 0 3px #fff0a0,inset 0 -4px #c8962e,0 3px 0 var(--ink)}
 
 /* ---- Elevation: little timber building ------------------------------------------------ */
-#building{width:380px;margin:10px 4px 0 48px;position:relative;padding-top:40px;border-inline:4px solid var(--ink);border-bottom:4px solid var(--ink)}
+#building{width:460px;margin:10px 4px 0 48px;position:relative;padding-top:40px;border-inline:4px solid var(--ink);border-bottom:4px solid var(--ink)}
 #building:before{content:"BOT OFFICE";position:absolute;top:0;left:-18px;right:-18px;height:40px;border:4px solid var(--ink);border-radius:4px 4px 0 0;
   background:repeating-linear-gradient(0deg,#9a3f2c 0 7px,#6d2a1d 7px 9px);box-shadow:inset 0 4px #c45a3d;
   text-align:center;line-height:30px;font-size:13px;font-weight:600;letter-spacing:2px;color:#fff3cf;text-shadow:2px 2px 0 #4a1a10}
@@ -49,7 +49,7 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 .ground{position:absolute;left:-22px;right:-22px;bottom:-22px;height:18px;background:var(--t-grass) 0 0/32px 32px;border-top:4px solid #3c6a26}
 
 /* ---- Plan ------------------------------------------------------------------------------ */
-#plan{display:block;position:relative;background:var(--t-grass) 0 0/32px 32px,#5e9b3c;margin:9px;box-shadow:0 0 0 5px var(--wood),0 0 0 9px var(--ink),0 0 0 12px var(--wood-lt),0 0 0 15px var(--ink)}
+#plan{display:block;position:relative;background:var(--t-grass) 0 0/32px 32px,#5e9b3c;margin:16px;box-shadow:0 0 0 5px var(--wood),0 0 0 9px var(--ink),0 0 0 12px var(--wood-lt),0 0 0 15px var(--ink)}
 #plan>div{position:absolute}
 :where(#plan) i,:where(#plan) b,:where(#plan) span{position:absolute;display:block}
 #legend{margin-top:26px;font-size:13px;max-width:820px;line-height:1.8}
@@ -66,7 +66,7 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 /* walls */
 .wall{left:0;top:0;right:0;height:44px;background-repeat:repeat-x;background-size:32px 44px;box-shadow:0 3px 0 rgba(43,26,16,.22)}
 .wall-lobby{background-image:var(--t-wall-lobby)}
-.wall-rest{height:24px;background-image:var(--t-wall-rest);background-position:0 100%}
+.wall-rest{background-image:var(--t-wall-rest)}
 
 /* corridor and core */
 .p-corr{background:var(--t-cobble) 0 0/32px 32px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 4px rgba(43,26,16,.35),inset 0 -4px rgba(43,26,16,.25)}
@@ -81,8 +81,11 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 .p-lobby .lbl{--dept-color:#c9774e}
 .p-lobby .counter{left:16px;top:62px;width:104px;height:52px;background-image:var(--s-counter);z-index:2}
 .p-lobby .lobby-plant{right:4px;top:44px;width:28px;height:44px;background-image:var(--s-plant);z-index:2}
-.p-lobby .lobby-art{right:38px;top:9px;width:32px;height:26px;background-image:var(--s-painting)}
-.entry-mat{bottom:10px;left:28px;width:76px;height:24px;background:repeating-linear-gradient(90deg,#6e8a4f 0 4px,#5a7440 4px 8px);border:3px solid #3c5228;box-shadow:inset 0 0 0 2px #9ab86a}
+.p-lobby .lobby-art{right:8px;top:9px;width:32px;height:26px;background-image:var(--s-painting)}
+.p-lobby .lobby-plant2{left:4px;bottom:44px;width:28px;height:44px;background-image:var(--s-plant);z-index:2}
+.p-lobby .wdoor{left:72px;top:4px;width:28px;height:40px;background-image:var(--s-door)}
+.p-lobby .entrance{left:58px;bottom:-10px;width:52px;height:16px;background-image:var(--s-entrance);z-index:3}
+.entry-mat{bottom:12px;left:46px;width:76px;height:24px;background:repeating-linear-gradient(90deg,#6e8a4f 0 4px,#5a7440 4px 8px);border:3px solid #3c5228;box-shadow:inset 0 0 0 2px #9ab86a}
 
 /* department rooms */
 .p-room{--dept-color:#788a79;border:6px solid var(--ink);background:var(--t-wood) 0 0/64px 30px}
@@ -100,13 +103,13 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 
 /* break area */
 .p-rest{background:var(--t-wood-pale) 0 0/64px 30px;border:6px solid var(--ink);z-index:1}
-.p-rest .lbl{--dept-color:#6fae8a;font-size:10px;left:4px;top:3px;padding:2px 5px 3px 9px}
-.p-rest .clock{right:6px;top:0;width:24px;height:24px;background-image:var(--s-clock)}
-.rest-rug{left:26px;right:20px;top:46px;bottom:34px;--dept-color:#b8544a}
-.p-rest .sofa{left:0;top:30px;width:28px;height:92px;background-image:var(--s-sofa);z-index:1}
+.p-rest .lbl{--dept-color:#6fae8a}
+.p-rest .clock{right:8px;top:8px;width:24px;height:24px;background-image:var(--s-clock)}
+.rest-rug{left:26px;right:20px;top:54px;bottom:34px;--dept-color:#b8544a}
+.p-rest .sofa{left:0;top:52px;width:28px;height:92px;background-image:var(--s-sofa);z-index:1}
 .p-rest .coffee{left:2px;bottom:6px;width:32px;height:24px;background-image:var(--s-coffee);z-index:1}
 .p-rest .cooler{right:4px;bottom:4px;width:24px;height:48px;background-image:var(--s-cooler);z-index:1}
-.p-rest .rest-plant{right:2px;top:26px;width:28px;height:44px;background-image:var(--s-plant);z-index:1}
+.p-rest .wdoor{left:104px;top:4px;width:28px;height:40px;background-image:var(--s-door)}
 
 /* desks: chair (behind) -> person -> desk front */
 .desk{width:96px;height:80px;z-index:6}
@@ -121,19 +124,16 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 .desk.away em{color:#7a6a58;background:#e3d6ba;border:2px dashed #9a8466}
 :where(#plan) .desk.away em .away-tag{position:static;display:block;font-style:normal;font-weight:400;font-size:9px;line-height:10px}
 
-/* people: pixel head + shirt + legs */
-.person{width:40px;height:48px;z-index:5;pointer-events:none}
+/* people: one pixel sprite per bot, clothes painted on */
+.person{width:40px;height:34px;z-index:5;pointer-events:none}
 .person .p-head{left:4px;top:0;width:32px;height:32px;z-index:2;background-size:100% 100%;background-repeat:no-repeat;image-rendering:pixelated}
-.person .p-body{left:11px;top:27px;width:18px;height:12px;background:var(--c);border:2px solid var(--ink);border-radius:4px 4px 1px 1px;
-  box-shadow:inset 0 -3px var(--cd),inset 3px 2px rgba(255,244,220,.28)}
-.person .p-legs{left:13px;top:38px;width:14px;height:6px;background:linear-gradient(90deg,#4a3326 0 5px,transparent 5px 9px,#4a3326 9px);border-bottom:2px solid var(--ink)}
-.person.at-rest:before{content:"";position:absolute;left:9px;top:41px;width:22px;height:5px;border-radius:50%;background:rgba(43,26,16,.28)}
+.person.at-rest:before{content:"";position:absolute;left:9px;top:28px;width:22px;height:5px;border-radius:50%;background:rgba(43,26,16,.28)}
 .person.at-rest{animation:bob 1.4s infinite}
 .person.at-desk .p-head{animation:type .9s infinite;animation-delay:inherit}
 @keyframes bob{0%,100%{transform:none;animation-timing-function:steps(1)}50%{transform:translateY(-2px);animation-timing-function:steps(1)}}
 @keyframes type{0%,100%{transform:none;animation-timing-function:steps(1)}50%{transform:translateY(1px);animation-timing-function:steps(1)}}
 .person em{display:none}
-.person.at-rest em{position:absolute;display:block;left:-24px;right:-24px;top:31px;text-align:center;font-style:normal;font-size:10px;font-weight:600;line-height:11px;white-space:nowrap;
+.person.at-rest em{position:absolute;display:block;left:-24px;right:-24px;top:33px;text-align:center;font-style:normal;font-size:10px;font-weight:600;line-height:11px;white-space:nowrap;
   color:var(--text);background:#fffbe8;border:1px solid var(--ink);border-radius:3px;padding:0 3px;z-index:3;box-shadow:0 2px 0 rgba(43,26,16,.35)}
 .person .p-head.has-img{background-color:#fff;background-size:cover;background-position:center}
 .person .p-head.has-img.shape-blob,.person .p-head.has-img.shape-round{border-radius:50%}
@@ -143,3 +143,35 @@ main{display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
 .person .p-head.has-img.shape-teardrop{clip-path:polygon(32% 6%,12% 38%,14% 68%,32% 92%,62% 94%,88% 72%,86% 42%,62% 12%)}
 .person .p-head.has-img.shape-cloud{border-radius:50% 50% 45% 45%}
 @media (prefers-reduced-motion:reduce){.person,.person .p-head{animation:none!important}}
+
+/* corridor end: closed off toward the new wing */
+.p-corr .barricade{right:14px;top:12px;width:64px;height:32px;background-image:var(--s-barricade);z-index:2}
+.p-corr .corr-cone1{right:82px;top:16px;width:24px;height:28px;background-image:var(--s-cone);z-index:2}
+.p-corr .corr-cone2{right:0;top:24px;width:24px;height:28px;background-image:var(--s-cone);z-index:2}
+
+/* under-construction wing: not a room anyone can enter yet */
+.p-wip{background:var(--t-concrete) 0 0/32px 32px;border:6px solid var(--ink);border-image:repeating-linear-gradient(45deg,#f4c542 0 8px,var(--ink) 8px 16px) 6;z-index:1;overflow:hidden}
+.wall-wip{background-image:var(--t-studs)}
+.lbl.wip-sign{color:var(--ink);background:#f4c542;text-shadow:none;--dept-color:var(--ink);box-shadow:inset 0 2px #fff0a0,inset 0 -2px #c8962e,inset 4px 0 var(--ink),0 2px 0 rgba(30,18,8,.5);line-height:1.15}
+.wip-sign small{display:block;font-size:9px;font-weight:400}
+.p-wip .scaffold{width:64px;height:88px;background-image:var(--s-scaffold);z-index:2}
+.p-wip .ladder{width:24px;height:72px;background-image:var(--s-ladder);z-index:2}
+.p-wip .blueprint{width:36px;height:24px;background-image:var(--s-blueprint)}
+.p-wip .lumber{width:60px;height:28px;background-image:var(--s-lumber)}
+.p-wip .bricks{width:44px;height:32px;background-image:var(--s-bricks)}
+.p-wip .cement{width:40px;height:24px;background-image:var(--s-cement)}
+.p-wip .cone{width:24px;height:28px;background-image:var(--s-cone)}
+.p-wip .wheelbarrow{width:52px;height:32px;background-image:var(--s-wheelbarrow)}
+.worker{position:absolute}
+.worker .hat{left:2px;top:-7px;width:36px;height:18px;background-image:var(--s-hardhat);z-index:3}
+.worker .hammer{left:30px;top:18px;width:20px;height:24px;background-image:var(--s-hammer);z-index:4;transform-origin:50% 90%;animation:swing .7s infinite;animation-delay:inherit}
+.worker .carried{left:-10px;top:-34px;width:60px;height:28px;z-index:4}
+.worker.carry{animation:bob 1s infinite}
+.worker.hammer .p-head{animation:type .7s infinite;animation-delay:inherit}
+@keyframes swing{0%,100%{transform:rotate(-55deg);animation-timing-function:steps(1)}50%{transform:rotate(15deg);animation-timing-function:steps(1)}}
+.bay.wip{flex:.75;border-right:0;background:linear-gradient(90deg,#7c8a99 0 3px,transparent 3px) 0 0/22px 100%,linear-gradient(#7c8a99 0 3px,transparent 3px) 0 0/100% 23px,
+  repeating-linear-gradient(0deg,rgba(43,26,16,.15) 0 2px,transparent 2px 12px),#c9b083}
+.bay.wip:before{content:"";position:absolute;inset:auto 0 0;height:6px;background:repeating-linear-gradient(45deg,#f4c542 0 6px,var(--ink) 6px 12px)}
+.bay{position:relative}
+#legend .wip-swatch{background:repeating-linear-gradient(45deg,#f4c542 0 3px,var(--ink) 3px 6px)}
+@media (prefers-reduced-motion:reduce){.worker,.worker *{animation:none!important}}
