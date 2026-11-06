@@ -1,0 +1,47 @@
+===== A) Port 8765 occupied by a non-HTTP listener; launcher should fall back =====
+Non-HTTP occupier PID 382845 log: listening on 8765
+LISTEN 0      1          127.0.0.1:8765       0.0.0.0:*    users:(("python3",pid=382845,fd=3))      
+curl of 8765 (should fail HTTP):
+curl exit=28
+
+$ bash start-office.command
+Port 8765 is busy (not an HTTP server). Starting the page at http://127.0.0.1:8766/
+Live status is unavailable (grokbot CLI missing or the bridge failed). The page will use mock status. Log in to grokbot on this machine and run this launcher again to enable live status.
+Office URL: http://127.0.0.1:8766/
+Office URL: http://127.0.0.1:8766/
+Page server PID: 382896
+Live status: unavailable
+This window keeps the office stack running. Press Ctrl+C to stop.
+
+recorded port: 8766
+curl fallback http://127.0.0.1:8766/
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.13.5
+Date: Fri, 06 Nov 2026 07:02:52 GMT
+Content-type: text/html
+Content-Length: 50
+
+$ bash stop-office.command  (should stop only the fallback server, not the occupier)
+Stopped page server (PID 382896).
+Stop finished. (Ctrl+C in the starter window also stops only the processes that window started; it never kills a reused pre-existing server.)
+Occupier PID 382845 still alive (correct; launcher did not kill it).
+curl 8766 after stop exit=7
+Occupier stopped for cleanup.
+
+===== B) Port 8765 already serving HTTP; launcher should reuse it =====
+Independent HTTP server PID 383102 answering on 8765 (http_code=200).
+
+$ bash start-office.command
+Port 8765 is already in use; opening the existing server.
+Live status is unavailable (grokbot CLI missing or the bridge failed). The page will use mock status. Log in to grokbot on this machine and run this launcher again to enable live status.
+Office URL: http://127.0.0.1:8765/
+The office stack is already running.
+
+$ bash stop-office.command  (must not kill the independent server)
+Stop finished. (Ctrl+C in the starter window also stops only the processes that window started; it never kills a reused pre-existing server.)
+Independent HTTP PID 383102 still alive (correct; not claimed in .run/).
+curl after stop-office (independent server should still answer):
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.13.5
+Date: Fri, 06 Nov 2026 07:02:53 GMT
+Independent HTTP server stopped for cleanup.

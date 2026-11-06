@@ -5,3 +5,5 @@ tools/status-bridge/raw*
 __pycache__/
 data/.status.live.*.tmp
 data/boss.local.json
+# Runtime files written by start-office.command (PIDs and logs)
+.run/

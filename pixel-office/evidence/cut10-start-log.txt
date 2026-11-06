@@ -1,0 +1,6 @@
+Live status is unavailable (grokbot CLI missing or the bridge failed). The page will use mock status. Log in to grokbot on this machine and run this launcher again to enable live status.
+Office URL: http://127.0.0.1:8765/
+Office URL: http://127.0.0.1:8765/
+Page server PID: 380807
+Live status: unavailable
+This window keeps the office stack running. Press Ctrl+C to stop.
