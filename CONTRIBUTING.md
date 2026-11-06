@@ -12,8 +12,9 @@
 
 ## Reviews
 
-- A pull request is optional on Origin. If you skip it, push the branch and say what the cut changes.
+- Open a pull request against `main`. Describe what the cut changes so a reviewer can verify it.
 
 ## Secrets
 
-- Never commit secrets, tokens, credentials, or local environment files.
+- Never commit secrets, tokens, credentials, `.env` files, `data/status.live.json`, `data/boss.local.json`, or client config.
+- Do not scrape or document unofficial client config paths, desktop logins, or local profile files as a status or appearance source.

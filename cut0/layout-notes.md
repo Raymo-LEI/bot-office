@@ -1,7 +1,12 @@
-# Bot Office Cut 0 · 布局说明（供下一刀 3D）
+# Cut 0 layout notes (historical)
 
-1. **三层竖向**：自上而下 3F Heads → 2F PMs → 1F Workers；每层同一套三翼平面，垂直对齐方便一眼对照职责层级。
-2. **三翼分区**：从左到右 Optics（蓝）| Painting（橙）| Office（绿）；翼间以柱网与色块区分，不做互通大开间。
-3. **垂直动线**：电梯/楼梯芯筒落在 Painting 与 Office 翼之间，贯通三层；日常上下楼不穿部门工位区。
-4. **工位逻辑**：每翼每层一实名工位；1F Optics / Office 为虚线「待招」；Painting 1F 为 Ins Sampler。汇报保持 1:1，无项目群。
-5. **协调约定**：跨部门事项经 3F Office Head 中转；概念图仅示结构，不含实时状态灯或可交互 3D。
+> **Banner — early isometric concept only.**  
+> These notes describe the original three-floor concept sketch. The interactive visualizer now uses a shared **1100×640** plan on **1F–3F** plus a **4F Boss’s Suite**. See [pixel-office/README.md](../pixel-office/README.md) for the current layout. The points below no longer describe the running page.
+
+## Historical concept points (no longer current)
+
+1. **Three vertical floors** — top to bottom: 3F Heads → 2F PMs → 1F Workers; each floor shared the same three-wing plan so role layers lined up. *(Today there is also 4F Boss’s Suite.)*
+2. **Three wings** — left to right Optics (blue) | Painting (orange) | Office (green); separated by column grid and color blocks, not one open floorplate. *(Today department colors are rug and wall-trim accents, not a full-room wash.)*
+3. **Vertical circulation** — elevator/stair core between Painting and Office, through all three floors, so everyday travel did not cut through desk areas.
+4. **Seat logic** — one named seat per wing per floor; 1F Optics / Office drawn as dashed “to hire”; Painting 1F was Ins Sampler; reporting stayed 1:1 with no project groups. *(Today 1F reserves twelve open desks — four per department — and capacity is six desk slots per department room.)*
+5. **Coordination** — cross-department items routed via 3F Office Head; the concept drawing showed structure only, with no live status lights or interactive 3D.
