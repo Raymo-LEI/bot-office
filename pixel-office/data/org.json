@@ -37,49 +37,56 @@
       "department": "office",
       "title": "Office Head",
       "avatarShape": "wedge",
-      "avatarColor": "#10B8A0"
+      "avatarColor": "#10B8A0",
+      "agentId": "87d9cc5b-c0da-4089-b511-ea1a16c90b9f"
     },
     {
       "floor": "3F",
       "department": "optics",
       "title": "Optics Head",
       "avatarShape": "cloud",
-      "avatarColor": "#F86810"
+      "avatarColor": "#F86810",
+      "agentId": "8f0ed1d9-3f43-46d1-a1de-7eb9ebb05e7a"
     },
     {
       "floor": "3F",
       "department": "painting",
       "title": "Painting Head",
       "avatarShape": "teardrop",
-      "avatarColor": "#F09010"
+      "avatarColor": "#F09010",
+      "agentId": "f55fb5fa-3861-49e3-ae1d-2b51bc3beb33"
     },
     {
       "floor": "2F",
       "department": "office",
       "title": "Office PM",
       "avatarShape": "teardrop",
-      "avatarColor": "#10B8A0"
+      "avatarColor": "#10B8A0",
+      "agentId": "7aa3ae0b-f152-44e2-b65c-643127750a23"
     },
     {
       "floor": "2F",
       "department": "optics",
       "title": "Optics PM",
       "avatarShape": "blob",
-      "avatarColor": "#F09010"
+      "avatarColor": "#F09010",
+      "agentId": "d20c30b8-aa50-45fb-b9ed-a12461916f59"
     },
     {
       "floor": "2F",
       "department": "painting",
       "title": "Painting PM",
       "avatarShape": "blob",
-      "avatarColor": "#F82838"
+      "avatarColor": "#F82838",
+      "agentId": "754be751-ef10-46b7-bea5-071da40a71e3"
     },
     {
       "floor": "1F",
       "department": "painting",
       "title": "Ins Sampler",
       "avatarShape": "hex",
-      "avatarColor": "#A06838"
+      "avatarColor": "#A06838",
+      "agentId": "96fb93d3-a23d-4478-ab4f-fca4f8599a5e"
     },
     {
       "floor": "1F",

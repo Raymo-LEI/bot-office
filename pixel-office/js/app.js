@@ -135,4 +135,5 @@ Promise.all([
   (window.StatusAPI ? StatusAPI.loadStatus() : Promise.resolve(new Map())).catch(() => new Map())
 ]).then(([j, map]) => {
   org = j; statusMap = map; cur = org.floors[0].id; render();
+  if (window.StatusAPI) setInterval(() => StatusAPI.loadStatus().then(m => { statusMap = m; render(); }).catch(() => {}), StatusAPI.REFRESH_MS);
 }).catch(e => document.body.insertAdjacentHTML('beforeend', `<p>Unable to load the office. Serve this folder with python3 -m http.server 8765 and open http://127.0.0.1:8765/ (not file://). ${esc(e)}</p>`));

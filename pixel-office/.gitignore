@@ -1,0 +1,6 @@
+data/status.live.json
+data/status.live.json.tmp
+*.raw.json
+tools/status-bridge/raw*
+__pycache__/
+data/.status.live.*.tmp

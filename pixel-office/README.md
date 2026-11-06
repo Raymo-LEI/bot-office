@@ -1,6 +1,6 @@
 # Bot Office
 
-A pure static HTML/CSS/JavaScript office: no frameworks, build step, or live status integration.
+A pure static HTML/CSS/JavaScript office: no frameworks or build step. There is no official browser-pollable status API; an optional local `grokbot` CLI bridge can write status for your own machine (see below).
 
 ## Run locally
 
@@ -26,14 +26,14 @@ Departments use `{id, name, color}`. Their color is a rug and wall-trim accent, 
 - Schema: `data/status.schema.json`, shaped as `{"records":[{seatKey, working, source, updatedAt}]}`. `state: "working" | "away"` is also accepted.
 - Seat key: `floor|department|id` when a seat has an optional `id` (used for the 1F Open desks, e.g. `1F|optics|optics-1`); otherwise `floor|department|title`.
 - Per-floor layout: `layoutByFloor["1F"]` overrides the shared `layout` (width, height, core, corridor, lobby, rest, restSlots, rooms, deskSlots). 1F has 12 desks (4 per department); 3F/2F use the shared 640×400 layout.
-- Mock data: `data/status.mock.json`. A seat key is `floor|department|title`; the two Open keys are `1F|optics|Open` and `1F|office|Open`.
+- Mock data: `data/status.mock.json`. Open seats use their `id` in the key (`1F|optics|optics-1`…`optics-4`, `1F|painting|painting-2`…`painting-4`, `1F|office|office-1`…`office-4`); other seats use `floor|department|title`.
 - Loader: `js/status.js` exposes `window.StatusAPI` (`STATUS_URL`, `loadStatus`, `seatKey`, `isWorking`).
 - `working: true` places a person at their computer desk.
 - `working: false`, an away state, or a missing/unknown record places a person in the break area.
 - Open seats (`vacant: true`) retain a desk and empty chair but never show a person.
 - An away person's desk has a grey `(Away)` badge and dimmed chair; their name follows them to the break area.
 
-`STATUS_URL` remains the local mock file. A future documented, authorized source could supply the same schema, but no official live status or avatar source is connected here.
+The page fetches `data/status.live.json` first and falls back to `data/status.mock.json` if it is missing or invalid; it re-fetches every 15 s. The page only reads that JSON and never reads desktop logins, config folders, tokens, or sessions.
 
 ## Avatar slots
 
@@ -63,4 +63,22 @@ All furniture and floor artwork is original CSS in `css/style.css`, with decorat
 
 Rooms have wood planks or carpet tiles, department rugs and baseboard trim, windows with a soft light hint, framed wall art, bookshelves, plants, side tables and cups. Computer desks have wood tops, legs, monitors, keyboards, mugs and chairs. The lobby has a checkered floor, reception counter, terminal, plant and entry mat. The break area has a slim wall sofa, coffee table, cup and clock, leaving the person slots clear.
 
-The original topology, room rectangles, desk/rest slots, nine seats, seven occupied roles, avatar shapes/colors, and mock working flags are unchanged. This delivery does not capture new browser evidence; visual review and screenshots are a separate step.
+Cut5 reserved 1F to twelve desks (four per department) without changing the 3F/2F one-desk-per-department layout. The seven occupied roles, avatar tokens, and mock working flags are unchanged.
+
+## Local status bridge (optional)
+
+`tools/status-bridge/bridge.py` (Python 3 stdlib only) runs **on your own machine with your own grokbot login**. It runs exactly `grokbot status --json`, maps agents to seats via the optional hidden `agentId` on `data/org.json` seats (never displayed), and writes only `{records:[{seatKey, working, source:"live", updatedAt}]}` to `data/status.live.json` (gitignored). Not for a public page. The CLI is undocumented and may change with the client.
+
+Mapping (case-insensitive; `_`/`-` treated as spaces): `running`, `background work` → working (desk); `awaiting you`, `idle`, anything unknown → not working (break area). Computer/asleep fields are ignored. Unmapped agents are ignored. If the CLI is missing, fails, or returns unusable JSON, the bridge exits non-zero and leaves the live file untouched.
+
+```sh
+# 1. Log in to grokbot on your machine with the grokbot client (your own account).
+# 2. From the pixel-office folder:
+python3 tools/status-bridge/bridge.py                 # poll every 15 s (--interval N)
+python3 tools/status-bridge/bridge.py --once          # single write
+python3 tools/status-bridge/bridge.py --from-fixture --once   # prove mapping without the CLI
+# 3. Serve the page:
+python3 -m http.server 8765
+```
+
+Delete `data/status.live.json` to return to mock data. Research notes: `docs/official-bot-api-research.md`.

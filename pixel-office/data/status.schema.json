@@ -41,7 +41,8 @@
           "enum": [
             "mock",
             "live"
-          ]
+          ],
+          "description": "mock = data/status.mock.json; live = written by the local tools/status-bridge (grokbot status --json)."
         },
         "updatedAt": {
           "type": "string",

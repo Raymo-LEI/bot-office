@@ -1,0 +1,12 @@
+{
+  "agents": [
+    {"id": "87d9cc5b-c0da-4089-b511-ea1a16c90b9f", "status": "running"},
+    {"id": "8f0ed1d9-3f43-46d1-a1de-7eb9ebb05e7a", "status": "idle", "computer": "Asleep", "asleep": true},
+    {"agentId": "f55fb5fa-3861-49e3-ae1d-2b51bc3beb33", "status": "Awaiting you"},
+    {"id": "7aa3ae0b-f152-44e2-b65c-643127750a23", "state": "background_work"},
+    {"uuid": "d20c30b8-aa50-45fb-b9ed-a12461916f59", "status": "IDLE", "computer": "Bot's computer"},
+    {"id": "754be751-ef10-46b7-bea5-071da40a71e3", "status": "Running"},
+    {"id": "96fb93d3-a23d-4478-ab4f-fca4f8599a5e", "status": "background-work"},
+    {"id": "0b6f7c1e-2d4a-4e8b-9c3f-5a1d2e3f4a5b", "status": "running"}
+  ]
+}
