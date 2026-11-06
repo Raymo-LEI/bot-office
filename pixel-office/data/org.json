@@ -84,13 +84,13 @@
     {
       "floor": "1F",
       "department": "optics",
-      "title": "待招",
+      "title": "Open",
       "vacant": true
     },
     {
       "floor": "1F",
       "department": "office",
-      "title": "待招",
+      "title": "Open",
       "vacant": true
     }
   ],
@@ -102,21 +102,21 @@
       "y": 110,
       "w": 72,
       "h": 180,
-      "label": "电梯/楼梯"
+      "label": "Elevator/Stairs"
     },
     "corridor": {
       "x": 72,
       "y": 170,
       "w": 568,
       "h": 56,
-      "label": "走廊"
+      "label": "Corridor"
     },
     "lobby": {
       "x": 72,
       "y": 226,
       "w": 150,
       "h": 174,
-      "label": "门厅/接待"
+      "label": "Lobby"
     },
     "rooms": [
       {
@@ -190,7 +190,7 @@
       "y": 226,
       "w": 128,
       "h": 174,
-      "label": "休息区"
+      "label": "Break area"
     },
     "restSlots": [
       {

@@ -1,45 +1,49 @@
-# Pixel Office · Cut1（像素合楼）
+# Bot Office
 
-## 本地打开
+A pure static HTML/CSS/JavaScript office: no frameworks, build step, or live status integration.
+
+## Run locally
+
+```sh
+cd pixel-office
+python3 -m http.server 8765
 ```
-cd pixel-office && python3 -m http.server 8765
-```
-浏览器打开 http://127.0.0.1:8765/ （需 http，file:// 无法 fetch）。按钮或键盘 1/2/3 切换楼层。
 
-## 加项目组
-编辑 `data/org.json`：
-1. 在 `groups` 加 `{"id":"g-lens","name":"镜头组"}`
-2. 给相关 seat 加可选 `"groupId":"g-lens"`
-新部门：往 `departments` 加 `{id,name,color}`，seat 用该 id 即可；平面几何在 `layout`（core/corridor/lobby/rooms/deskSlots/rest/restSlots）。
+Open http://127.0.0.1:8765/ in a browser. HTTP is required for JSON fetches; `file://` will not work. Press 1 / 2 / 3 to switch floors, or click a floor.
 
-布局原则：每层同构对齐——左侧芯筒、贯通走廊、门厅靠芯筒，工位区按部门成房间分布于走廊两侧；座位按部门顺序依次落到该部门 deskSlots。渲染全部读配置，无写死部门。
+## Organization and layout
 
-## Status layer（二元：工作 / 不工作）
-- Schema：`data/status.schema.json` — `{ "records": [ { seatKey, working, source, updatedAt } ] }`；也接受 `state: "working"|"away"`
-- Mock：`data/status.mock.json`；`seatKey` = `floor|department|title`
-- 加载：`js/status.js` → `window.StatusAPI`（`STATUS_URL`、`loadStatus`、`seatKey`、`isWorking`）
+`data/org.json` drives floors, departments, groups, seats, and geometry. The same layout is used on all three floors: a core, corridor, lobby, three department rooms, and break area. Seats are placed in department order at that department's `deskSlots`. People who are not working use `restSlots`; Open seats have no person.
 
-### 位置切换（不是色点）
-- **工作**（`working: true` / `state: "working"`）→ 人物 token 画在**工位**
-- **不工作**（`working: false` / `state: "away"` / 缺记录）→ 人物 token 画在 **layout.rest + restSlots**
-- **待招 vacant** → 空桌，不画人
+To add an optional project group:
+1. Add a group such as `{"id":"g-lens","name":"Lens group"}` to `groups`.
+2. Set `"groupId":"g-lens"` on the relevant seat.
 
-### mock → live
-改 `js/status.js` 的 `STATUS_URL` 指向 live 端点（同一 StatusFile 形状），或替换 `data/status.mock.json`。
+Departments use `{id, name, color}`. Their color is a rug and wall-trim accent, not a full-room wash. Geometry lives in `layout` (`core`, `corridor`, `lobby`, `rooms`, `deskSlots`, `rest`, `restSlots`). Keep slots inside their rooms and allow space for character nameplates.
 
-## 外观（侧边栏形状头）
+## Binary status
 
-就座角色的 token 主体对齐 App 侧边栏小人：CSS/SVG **形状掩膜** + `avatarColor` 填色 + 两颗浅白胶囊眼。可带很小的身体/腿，用来辨认坐在工位还是站在休息区。默认不再使用桃色方块头。
+- Schema: `data/status.schema.json`, shaped as `{"records":[{seatKey, working, source, updatedAt}]}`. `state: "working" | "away"` is also accepted.
+- Mock data: `data/status.mock.json`. A seat key is `floor|department|title`; the two Open keys are `1F|optics|Open` and `1F|office|Open`.
+- Loader: `js/status.js` exposes `window.StatusAPI` (`STATUS_URL`, `loadStatus`, `seatKey`, `isWorking`).
+- `working: true` places a person at their computer desk.
+- `working: false`, an away state, or a missing/unknown record places a person in the break area.
+- Open seats (`vacant: true`) retain a desk and empty chair but never show a person.
+- An away person's desk has a grey `(Away)` badge and dimmed chair; their name follows them to the break area.
 
-可选字段可写在 `data/org.json` 的 seat 上，或 `data/status*.json` 的 StatusRecord 上；**status 记录值优先于 seat 值**，空字段忽略。
+`STATUS_URL` remains the local mock file. A future documented, authorized source could supply the same schema, but no official live status or avatar source is connected here.
 
-- `avatarUrl`（string|null）：有图用图（按 `avatarShape` 做掩膜）。这批座位无图。
-- `avatarShape`：`wedge`（丸角右指三角 / 播放键）| `teardrop`（水滴）| `hex`（六边形）| `blob`（圆）| `cloud`（云朵 / 多瓣）| `round`（同 blob）| `square`。缺省 `blob`。
-- `avatarColor`：形状填色；缺省用部门色。
+## Avatar slots
 
-当前就座外形写在 `org.json` seats（待招不填、不扩座）：
+Optional appearance fields can be set on seats or status records. Nonempty status values override seat values (`appearance()`); an image takes priority over the generated head.
 
-| title | floor | avatarShape | avatarColor |
+- `avatarUrl` (string or null): optional image, masked by the selected shape.
+- `avatarShape`: `wedge` (rounded right-pointing triangle), `teardrop`, `hex`, `blob` (circle), `cloud` (multi-lobed), `round` (circle), or `square`. Default: `blob`.
+- `avatarColor`: CSS fill color; defaults to the department color.
+
+Without an image, original SVG shapes with two pale capsule eyes form the head, with a small body and legs. Current seat appearances:
+
+| Role | Floor | Shape | Color |
 | --- | --- | --- | --- |
 | Office Head | 3F | wedge | `#10B8A0` |
 | Optics Head | 3F | cloud | `#F86810` |
@@ -49,6 +53,12 @@ cd pixel-office && python3 -m http.server 8765
 | Painting PM | 2F | blob | `#F82838` |
 | Ins Sampler | 1F | hex | `#A06838` |
 
-目前没有官方 live 头像源；`avatarUrl` 仍是占位插槽。`assets/avatar-demo.png` 仅作有图回退示例，mock 不再覆盖上述外形。
+`assets/avatar-demo.png` remains an unused image-slot example; the mock records contain no appearance overrides.
 
-不工作（人在休息区）时，原工位名牌变灰、虚线框并标「(离席)」，桌椅保留；名字标签跟人走。
+## Original furnished interior (Cut4)
+
+All furniture and floor artwork is original CSS in `css/style.css`, with decorative markup generated by `planHTML()` in `js/app.js`. No external artwork, copied pixels, third-party screenshots, or new PNGs are used.
+
+Rooms have wood planks or carpet tiles, department rugs and baseboard trim, windows with a soft light hint, framed wall art, bookshelves, plants, side tables and cups. Computer desks have wood tops, legs, monitors, keyboards, mugs and chairs. The lobby has a checkered floor, reception counter, terminal, plant and entry mat. The break area has a slim wall sofa, coffee table, cup and clock, leaving the person slots clear.
+
+The original topology, room rectangles, desk/rest slots, nine seats, seven occupied roles, avatar shapes/colors, and mock working flags are unchanged. This delivery does not capture new browser evidence; visual review and screenshots are a separate step.

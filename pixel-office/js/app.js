@@ -1,4 +1,4 @@
-// org.json 驱动布局；StatusAPI 二元位置：工作=工位人物，不工作=休息区人物
+// org.json drives the layout; binary status positions people at desks or in the break area.
 let org, cur, statusMap = new Map();
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -13,7 +13,7 @@ function working(seat) {
   return window.StatusAPI ? StatusAPI.isWorking(seat, statusMap) : false;
 }
 
-// 外观：status 记录覆盖 seat；无图时用形状掩膜 + avatarColor + 胶囊眼（不再用桃色方块头）
+// Status appearance overrides seat appearance; fallback uses shape, color and capsule eyes.
 const SHAPES = new Set(['wedge', 'teardrop', 'hex', 'blob', 'cloud', 'round', 'square']);
 const EYE = '#FFF6E8';
 
@@ -59,7 +59,7 @@ function personHTML(seat, color, x, y, where) {
   const head = a.url
     ? `<i class="p-head has-img shape-${esc(shape)}" style="background-image:url('${esc(cssUrl(a.url))}');background-color:${esc(fill)}"></i>`
     : `<span class="p-head shape-${esc(shape)}">${shapeSVG(shape, fill)}</span>`;
-  return `<div class="person at-${where}" style="left:${x}px;top:${y}px" title="${esc(seat.title)} · ${where === 'desk' ? '工作' : '不工作'}">` +
+  return `<div class="person at-${where}" style="left:${x}px;top:${y}px" title="${esc(seat.title)} · ${where === 'desk' ? 'working' : 'not working'}">` +
     head +
     `<i class="p-body" style="background:${esc(fill)}"></i><i class="p-legs"></i>` +
     `<em>${esc(seat.title)}</em></div>`;
@@ -69,11 +69,11 @@ function planHTML(groups) {
   const L = org.layout, dm = Object.fromEntries(org.departments.map(d => [d.id, d]));
   let h = R(L.corridor, 'p-corr', '', `<span>${esc(L.corridor.label||'')}</span>`) +
     R(L.core, 'p-core', '', `<span>${esc(L.core.label)}</span>`) +
-    R(L.lobby, 'p-lobby', '', `<span>${esc(L.lobby.label)}</span><i class="rec"></i>`);
-  if (L.rest) h += R(L.rest, 'p-rest', '', `<span class="lbl">${esc(L.rest.label||'休息区')}</span>`);
+    R(L.lobby, 'p-lobby', '', `<span class="area-label">${esc(L.lobby.label)}</span><i class="rec"><i class="rec-screen"></i><i class="rec-book"></i></i><i class="plant lobby-plant"></i><i class="entry-mat"></i>`);
+  if (L.rest) h += R(L.rest, 'p-rest', '', `<span class="lbl">${esc(L.rest.label||'Break area')}</span><i class="sofa"></i><i class="coffee-table"><i class="cup"></i></i><i class="wall-clock"></i>`);
   (L.rooms||[]).forEach(r => { const d = dm[r.department];
-    h += R(r, 'p-room' + (d ? '' : ' p-misc'), d ? `background:${d.color}44;border-color:${d.color}` : '',
-      `<span class="lbl" style="${d?`background:${d.color}`:''}">${esc(r.label)}</span><i class="door"></i>`); });
+    h += R(r, 'p-room' + (d ? ` dept-${esc(d.id)}` : ' p-misc'), d ? `--dept-color:${d.color}` : '',
+      `<i class="rug"></i><span class="lbl" style="${d?`background:${d.color}`:''}">${esc(r.label)}</span><i class="window"></i><i class="wall-art"></i><i class="shelf"></i><i class="plant"></i><i class="side-table"><i class="cup"></i></i><i class="door"></i>`); });
 
   const used = {};
   let restIdx = 0;
@@ -89,8 +89,8 @@ function planHTML(groups) {
     // desk always drawn
     const away = !s.vacant && !working(s);
     h += `<div class="desk f${k.facing||'S'} ${s.vacant?'vacant':''}${away?' away':''}" style="left:${k.x}px;top:${k.y}px">` +
-      `<b style="background:${s.vacant?'transparent':d.color}"></b><i class="chair"></i>` +
-      `<em>${esc(s.title)}${away?'<i class="away-tag">(离席)</i>':''}${s.groupId?`<small>${esc((groups[s.groupId]||{}).name||s.groupId)}</small>`:''}</em></div>`;
+      `<b class="top"></b><i class="desk-leg leg-left"></i><i class="desk-leg leg-right"></i><i class="monitor"></i><i class="keyboard"></i><i class="mug"></i><i class="chair"></i>` +
+      `<em>${esc(s.title)}${away?'<i class="away-tag">(Away)</i>':''}${s.groupId?`<small>${esc((groups[s.groupId]||{}).name||s.groupId)}</small>`:''}</em></div>`;
     // vacant: empty desk, no person
     if (s.vacant) return;
     if (working(s)) {
@@ -117,12 +117,12 @@ function render() {
         return working(s) ? '■' : '□';
       }).join(' ')}</div>`).join('') + '</div>').join('') + '<div class="ground"></div>';
   const fl = org.floors.find(f => f.id === cur);
-  $('#planTitle').textContent = `平面 · ${fl.id} ${fl.label}`;
+  $('#planTitle').textContent = `Plan · ${fl.id} ${fl.label}`;
   $('#plan').style.width = org.layout.width+'px'; $('#plan').style.height = org.layout.height+'px';
   $('#plan').innerHTML = planHTML(groups);
   $('#legend').innerHTML = org.departments.map(d => `<span style="background:${d.color}"></span>${esc(d.name)}`).join('') +
-    ((org.groups||[]).length ? ' · 项目组：' + org.groups.map(g => esc(g.name)).join('、') : '') +
-    ' · 人物在工位=工作 · 人物在休息区=不工作 · 空桌=待招';
+    ((org.groups||[]).length ? ' · Groups: ' + org.groups.map(g => esc(g.name)).join(', ') : '') +
+    ' · Person at desk = working · Person in break area = not working · Empty desk = Open';
 }
 
 function go(f) { if (org.floors.some(x => x.id === f)) { cur = f; render(); } }
@@ -134,4 +134,4 @@ Promise.all([
   (window.StatusAPI ? StatusAPI.loadStatus() : Promise.resolve(new Map())).catch(() => new Map())
 ]).then(([j, map]) => {
   org = j; statusMap = map; cur = org.floors[0].id; render();
-}).catch(e => document.body.insertAdjacentHTML('beforeend', `<p>加载失败（需用 http.server 打开）：${e}</p>`));
+}).catch(e => document.body.insertAdjacentHTML('beforeend', `<p>Unable to load the office. Serve this folder with python3 -m http.server 8765 and open http://127.0.0.1:8765/ (not file://). ${esc(e)}</p>`));

@@ -26,7 +26,7 @@
         },
         "working": {
           "type": "boolean",
-          "description": "true=桌前(工作) false=休息区(不工作)"
+          "description": "true = person at desk (working); false = person in break area (not working)."
         },
         "state": {
           "type": "string",
@@ -34,7 +34,7 @@
             "working",
             "away"
           ],
-          "description": "可选替代 working"
+          "description": "Optional alternative to working."
         },
         "source": {
           "type": "string",
@@ -52,7 +52,7 @@
             "string",
             "null"
           ],
-          "description": "可选头像图 URL。有图用图（按 avatarShape 掩膜）。无图→形状填色+胶囊眼。无官方真源，仅为插槽。"
+          "description": "Optional avatar image URL, masked by avatarShape. Without an image, render a colored shape with capsule eyes. A placeholder slot, not an official live avatar source."
         },
         "avatarShape": {
           "type": "string",
@@ -65,14 +65,14 @@
             "round",
             "square"
           ],
-          "description": "头型：wedge=丸角右指三角/播放键，teardrop=水滴，hex=六边形，blob=圆，cloud=云朵/多瓣，round=同blob，square=方。缺省=blob（不再用桃色方块头）"
+          "description": "Head shape: wedge = rounded right-pointing triangle; teardrop = drop; hex = hexagon; blob = circle; cloud = multi-lobed cloud; round = circle; square = square. Default: blob."
         },
         "avatarColor": {
           "type": "string",
-          "description": "形状填色（CSS 颜色）；缺省用部门色"
+          "description": "Shape fill (CSS color); defaults to department color."
         }
       },
-      "description": "缺失/未知记录一律视为不工作；avatar* 字段可选，也可写在 org.json seat 上，status 记录值优先"
+      "description": "Missing or unknown records count as not working. Optional avatar fields may also be set on org.json seats; status values override seat values."
     }
   }
 }
