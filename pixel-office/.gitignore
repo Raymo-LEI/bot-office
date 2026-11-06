@@ -4,3 +4,4 @@ data/status.live.json.tmp
 tools/status-bridge/raw*
 __pycache__/
 data/.status.live.*.tmp
+data/boss.local.json

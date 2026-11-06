@@ -9,7 +9,7 @@ cd /workspace/bot-office/pixel-office
 python3 -m http.server 8765
 ```
 
-Open http://127.0.0.1:8765/ in a browser. HTTP is required for JSON fetches; `file://` will not work. Press 1 / 2 / 3 to switch floors, or click a floor.
+Open http://127.0.0.1:8765/ in a browser. HTTP is required for JSON fetches; `file://` will not work. Press 1 – 4 to switch floors, or click a floor.
 
 ## Organization and layout
 
@@ -24,6 +24,48 @@ Departments use `{id, name, color}`. Their color is a rug and wall-trim accent, 
 Capacity: each department room has 6 desk slots (3 columns × 2 rows, filled column by column so the first four seats form a 2×2 block), and the break area has 10 rest slots (2 columns × 5 rows). Adding a seat to `seats` is enough until a department passes six people.
 
 `construction` is a list of `{x, y, w, h, label, note}` areas drawn as a fenced-off building site with hazard tape, scaffolding, materials and decorative worker bots in hard hats. Nobody can be seated there, and the corridor is barricaded where it meets the site. When a wing is ready, remove its `construction` entry and add a room plus `deskSlots` in its place.
+
+## 4F penthouse (Boss's Suite)
+
+4F is the Boss's floor, set up with `layoutByFloor["4F"]`. It has no corridor, lobby, department rooms or break area (those keys are `null` or empty). Instead it has:
+
+- `suite`: one open marble-floored room with navy-and-gold wallpaper and a red carpet from the private lift.
+- `terrace`: a rooftop deck over the east wing, with a `pool` rectangle.
+- `rugs`: gold-bordered burgundy rugs.
+- `props`: a list of `{type, x, y}` furniture in plan coordinates. The types are `fireplace`, `aquarium` (both animated), `big-painting`, `trophies`, `shelf`, `globe`, `lux-sofa`, `lux-sofa-l`, `lux-sofa-r`, `lux-coffee`, `bar`, `wine`, `stool`, `piano`, `pool-table`, `chandelier`, `palm`, `lounger`, `parasol`, `hot-tub` and `telescope`. Move or add furniture by editing this list.
+
+The Boss seat (`4F|exec|boss`) uses the `exec` desk style: a mahogany executive desk with twin monitors and a velvet throne chair. When the Boss is not working, they relax on the lounge sofas (`restSlots`). On the elevation, 4F is drawn as a glass penthouse storey whose window lights up when the Boss is working. To drive it from the status bridge, add your agent's `agentId` to the Boss seat.
+
+## Design your own Boss selfie
+
+The Boss is drawn from a small pixel file instead of a generated shape. The project ships a generic crowned Boss bot in `data/boss.json`. To make the Boss look like you:
+
+1. Copy `data/boss.json` to `data/boss.local.json`. The page loads `boss.local.json` first and falls back to `boss.json`. `boss.local.json` is git-ignored, so your selfie stays on your machine unless you choose to commit it.
+2. Edit the file:
+
+```json
+{
+  "name": "Boss",
+  "outline": "#1e140e",
+  "palette": { "H": "#2a1c16", "S": "#fde9da", "E": "#2b1a14", "J": "#6d93d6" },
+  "pixels": [
+    "....HHHHHHHH....",
+    "..HHHHHHHHHHHH..",
+    ".HHSSSSSSSSSSHH.",
+    ".SSSSESSSSESSSS.",
+    ".SSSSESSSSESSSS.",
+    "..SSSSSSSSSSSS..",
+    "..JJJJJJJJJJJJ.."
+  ]
+}
+```
+
+- `pixels`: one string per row, one character per pixel, top to bottom. At most 24×24; 16 wide by 16–18 tall matches the other bots. `.` (or any character not in the palette) is transparent.
+- `palette`: maps each character to a CSS color. Use any letters you like.
+- `outline` (optional): a color for an automatic 1px outline around the whole sprite. Leave it out to draw your own outline in `pixels`.
+- `name` (optional, up to 24 characters): the name on the desk plate and tooltip. It does not change the seat key, so status keeps working.
+
+Each pixel is shown at 2×, and the sprite is centered over the throne with its bottom on the desk. Tips: draw the face in the top two-thirds, keep the eyes at least 3 pixels apart, and paint clothes on the bottom 3–4 rows like the other bots. Reload the page to see your changes.
 
 ## Binary status
 

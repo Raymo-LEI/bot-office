@@ -1,6 +1,10 @@
 {
   "floors": [
     {
+      "id": "4F",
+      "label": "Boss"
+    },
+    {
       "id": "3F",
       "label": "Heads"
     },
@@ -32,6 +36,13 @@
   ],
   "groups": [],
   "seats": [
+    {
+      "floor": "4F",
+      "department": "exec",
+      "id": "boss",
+      "title": "Boss",
+      "avatarSprite": "boss"
+    },
     {
       "floor": "3F",
       "department": "office",
@@ -388,5 +399,301 @@
         "note": "Under construction"
       }
     ]
+  },
+  "layoutByFloor": {
+    "4F": {
+      "core": {
+        "x": 0,
+        "y": 220,
+        "w": 72,
+        "h": 240,
+        "label": "Private lift"
+      },
+      "corridor": null,
+      "lobby": null,
+      "rest": null,
+      "rooms": [],
+      "construction": [],
+      "suite": {
+        "x": 72,
+        "y": 0,
+        "w": 800,
+        "h": 640,
+        "label": "Boss's Suite"
+      },
+      "terrace": {
+        "x": 872,
+        "y": 0,
+        "w": 228,
+        "h": 640,
+        "label": "Rooftop terrace",
+        "pool": {
+          "x": 936,
+          "y": 110,
+          "w": 124,
+          "h": 300
+        }
+      },
+      "rugs": [
+        {
+          "x": 360,
+          "y": 62,
+          "w": 220,
+          "h": 146
+        },
+        {
+          "x": 104,
+          "y": 82,
+          "w": 236,
+          "h": 196
+        },
+        {
+          "x": 596,
+          "y": 430,
+          "w": 196,
+          "h": 150
+        },
+        {
+          "x": 470,
+          "y": 236,
+          "w": 190,
+          "h": 150
+        }
+      ],
+      "deskSlots": [
+        {
+          "department": "exec",
+          "x": 404,
+          "y": 76,
+          "facing": "S",
+          "style": "exec"
+        }
+      ],
+      "restSlots": [
+        {
+          "x": 176,
+          "y": 214
+        },
+        {
+          "x": 226,
+          "y": 214
+        },
+        {
+          "x": 114,
+          "y": 124
+        },
+        {
+          "x": 304,
+          "y": 124
+        }
+      ],
+      "props": [
+        {
+          "type": "fireplace",
+          "x": 182,
+          "y": 8
+        },
+        {
+          "type": "big-painting",
+          "x": 440,
+          "y": 10
+        },
+        {
+          "type": "trophies",
+          "x": 300,
+          "y": 8
+        },
+        {
+          "type": "shelf",
+          "x": 620,
+          "y": 6
+        },
+        {
+          "type": "shelf",
+          "x": 672,
+          "y": 6
+        },
+        {
+          "type": "aquarium",
+          "x": 742,
+          "y": 6
+        },
+        {
+          "type": "globe",
+          "x": 590,
+          "y": 128
+        },
+        {
+          "type": "lux-sofa",
+          "x": 172,
+          "y": 232
+        },
+        {
+          "type": "lux-sofa-l",
+          "x": 108,
+          "y": 112
+        },
+        {
+          "type": "lux-sofa-r",
+          "x": 298,
+          "y": 112
+        },
+        {
+          "type": "lux-coffee",
+          "x": 196,
+          "y": 156
+        },
+        {
+          "type": "bar",
+          "x": 104,
+          "y": 470
+        },
+        {
+          "type": "wine",
+          "x": 104,
+          "y": 560
+        },
+        {
+          "type": "stool",
+          "x": 112,
+          "y": 446
+        },
+        {
+          "type": "stool",
+          "x": 142,
+          "y": 446
+        },
+        {
+          "type": "stool",
+          "x": 172,
+          "y": 446
+        },
+        {
+          "type": "stool",
+          "x": 202,
+          "y": 446
+        },
+        {
+          "type": "piano",
+          "x": 400,
+          "y": 470
+        },
+        {
+          "type": "pool-table",
+          "x": 634,
+          "y": 470
+        },
+        {
+          "type": "chandelier",
+          "x": 668,
+          "y": 486
+        },
+        {
+          "type": "chandelier",
+          "x": 540,
+          "y": 292
+        },
+        {
+          "type": "chandelier",
+          "x": 200,
+          "y": 370
+        },
+        {
+          "type": "palm",
+          "x": 80,
+          "y": 52
+        },
+        {
+          "type": "palm",
+          "x": 836,
+          "y": 60
+        },
+        {
+          "type": "palm",
+          "x": 80,
+          "y": 570
+        },
+        {
+          "type": "palm",
+          "x": 836,
+          "y": 570
+        },
+        {
+          "type": "palm",
+          "x": 346,
+          "y": 560
+        },
+        {
+          "type": "lounger",
+          "x": 890,
+          "y": 140
+        },
+        {
+          "type": "lounger",
+          "x": 890,
+          "y": 230
+        },
+        {
+          "type": "lounger",
+          "x": 890,
+          "y": 320
+        },
+        {
+          "type": "parasol",
+          "x": 874,
+          "y": 190
+        },
+        {
+          "type": "hot-tub",
+          "x": 950,
+          "y": 470
+        },
+        {
+          "type": "palm",
+          "x": 1060,
+          "y": 40
+        },
+        {
+          "type": "palm",
+          "x": 884,
+          "y": 570
+        },
+        {
+          "type": "palm",
+          "x": 1060,
+          "y": 570
+        },
+        {
+          "type": "telescope",
+          "x": 1062,
+          "y": 480
+        },
+        {
+          "type": "lounger",
+          "x": 1066,
+          "y": 140
+        },
+        {
+          "type": "lux-sofa-l",
+          "x": 478,
+          "y": 266
+        },
+        {
+          "type": "lux-sofa-r",
+          "x": 616,
+          "y": 266
+        },
+        {
+          "type": "lux-coffee",
+          "x": 538,
+          "y": 298
+        },
+        {
+          "type": "palm",
+          "x": 426,
+          "y": 220
+        }
+      ]
+    }
   }
 }
