@@ -11,6 +11,41 @@ python3 -m http.server 8765
 
 Open http://127.0.0.1:8765/ in a browser. HTTP is required for JSON fetches; `file://` will not work. Press 1 – 4 to switch floors, or click a floor.
 
+## One-click launcher (macOS)
+
+On a Mac, you can start the local office page and the optional status bridge with one double-click.
+
+1. Clone this repository onto your Mac.
+2. In Finder, open the `pixel-office` folder and double-click `start-office.command`.
+
+The first time macOS may block the file (Gatekeeper). Right-click `start-office.command` and choose Open, then confirm. If a downloaded copy is still blocked, run this from the `pixel-office` folder:
+
+```sh
+xattr -d com.apple.quarantine start-office.command
+xattr -d com.apple.quarantine stop-office.command
+```
+
+You can optionally drag `start-office.command` to the Dock.
+
+The launcher starts `python3 -m http.server` from this folder (default URL http://127.0.0.1:8765/) and, if the `grokbot` CLI is on your PATH, `python3 tools/status-bridge/bridge.py` (15 second poll). It then opens the page in your browser. Finder-launched Terminal windows often have a thin PATH, so the script adds Homebrew locations and sources `~/.zprofile` / `~/.bash_profile` when they exist (PATH only — it never reads Grok Bot config files, tokens, or sessions).
+
+This is for your own machine and your own grokbot login. It is not for a public page. The grokbot CLI is undocumented and may change with the client.
+
+If `grokbot` is missing or the bridge fails, the page still opens and uses mock status. Log in to grokbot on this machine and run the launcher again to enable live status.
+
+If port 8765 is already serving HTTP, the launcher reuses it and says so. If something else is using 8765, it tries 8766, then 8767, then 8768, and prints the URL it chose.
+
+To stop, press Ctrl+C in the Terminal window that started the stack, or double-click `stop-office.command`. Either action stops only processes this launcher started. They will not kill an HTTP server that was already running.
+
+Manual commands remain valid:
+
+```sh
+python3 -m http.server 8765
+python3 tools/status-bridge/bridge.py
+```
+
+On macOS, double-clicking a `.command` file opens Terminal and runs the same script. On Linux you can run `bash start-office.command` (the browser opens with `xdg-open` if available; otherwise the URL is printed).
+
 ## Organization and layout
 
 `data/org.json` drives floors, departments, groups, seats, and geometry. The same 1100×640 layout is used on all three floors: a core, corridor, lobby, three department rooms, a break area, and an east wing that is still under construction. Seats are placed in department order at that department's `deskSlots`. People who are not working use `restSlots`; Open seats have no person.

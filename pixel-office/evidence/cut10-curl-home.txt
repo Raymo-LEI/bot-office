@@ -1,0 +1,11 @@
+$ curl -sI http://127.0.0.1:8765/
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.13.5
+Date: Fri, 06 Nov 2026 07:00:20 GMT
+Content-type: text/html
+Content-Length: 50
+Last-Modified: Fri, 06 Nov 2026 07:00:18 GMT
+
+
+$ curl -s -o /dev/null -w 'http_code=%{http_code}\n' http://127.0.0.1:8765/
+http_code=200

@@ -1,0 +1,34 @@
+$ bash stop-office.command
+Stopped page server (PID 379931).
+Stop finished. (Ctrl+C in the starter window also stops only the processes that window started; it never kills a reused pre-existing server.)
+
+$ curl -sI --connect-timeout 1 --max-time 2 http://127.0.0.1:8765/ || true
+curl failed as expected after stop (exit 7)
+
+server.pid file removed
+nothing listening on 8765
+starter pid 379917 has exited
+
+Ctrl+C note: the starter traps INT/TERM and stops only children that invocation started (PIDs it wrote under .run/). It never kills a reused pre-existing HTTP server. stop-office.command uses the same PID-file stop path. A SIGINT demonstration follows at the end of this file after the port-busy tests are described in port-busy-log.txt; see the Ctrl+C demo section below if appended.
+
+===== Ctrl+C demonstration =====
+Starter PID: 383355
+Recorded page server PID: 383369
+Sending SIGINT to the starter (same as Ctrl+C in that window)...
+starter has exited
+page server PID 383369 is gone
+curl 8765 after Ctrl+C exit=7
+
+Starter window output after SIGINT:
+Port 8765 is busy (not an HTTP server). Starting the page at http://127.0.0.1:8767/
+Live status is unavailable (grokbot CLI missing or the bridge failed). The page will use mock status. Log in to grokbot on this machine and run this launcher again to enable live status.
+Office URL: http://127.0.0.1:8767/
+Office URL: http://127.0.0.1:8767/
+Page server PID: 383369
+Live status: unavailable
+This window keeps the office stack running. Press Ctrl+C to stop.
+
+Stopping the office processes started by this window...
+Stopped page server (PID 383369).
+
+Note: during this SIGINT demo, port 8765 still looked busy (leftover from the non-HTTP occupier test), so the starter chose http://127.0.0.1:8767/ and then Ctrl+C stopped only that child (PID 383369). That matches the required behavior: INT/TERM never kill a reused or unrelated listener.
