@@ -13,21 +13,56 @@ function working(seat) {
   return window.StatusAPI ? StatusAPI.isWorking(seat, statusMap) : false;
 }
 
-// 外观插槽：status 记录覆盖 seat；缺省 → 通用像素小人
+// 外观：status 记录覆盖 seat；无图时用形状掩膜 + avatarColor + 胶囊眼（不再用桃色方块头）
+const SHAPES = new Set(['wedge', 'teardrop', 'hex', 'blob', 'cloud', 'round', 'square']);
+const EYE = '#FFF6E8';
+
 function appearance(seat) {
   const rec = (window.StatusAPI && statusMap.get(StatusAPI.seatKey(seat))) || {};
   const pick = k => (rec[k] != null && rec[k] !== '') ? rec[k] : ((seat[k] != null && seat[k] !== '') ? seat[k] : null);
-  return { url: pick('avatarUrl'), shape: pick('avatarShape'), color: pick('avatarColor') };
+  const shape = pick('avatarShape');
+  return {
+    url: pick('avatarUrl'),
+    shape: SHAPES.has(shape) ? shape : 'blob',
+    color: pick('avatarColor')
+  };
 }
 const cssUrl = u => String(u).replace(/["'()\\\s]/g, encodeURIComponent);
+
+function shapeSVG(shape, color) {
+  const f = esc(color);
+  let body = `<circle cx="16" cy="16" r="14" fill="${f}"/>`;
+  let eyes = `<g fill="${EYE}" transform="rotate(-16 20 15)"><rect x="16.2" y="11.2" width="2.8" height="7.2" rx="1.4"/><rect x="21" y="10.8" width="2.8" height="7.2" rx="1.4"/></g>`;
+  if (shape === 'wedge') {
+    body = `<polygon points="7,7 25,16 7,25" fill="${f}" stroke="${f}" stroke-width="7" stroke-linejoin="round"/>`;
+    eyes = `<g fill="${EYE}" transform="rotate(-22 20 15)"><rect x="13.2" y="13.4" width="6.8" height="2.7" rx="1.35"/><rect x="20.8" y="12.6" width="6.8" height="2.7" rx="1.35"/></g>`;
+  } else if (shape === 'teardrop') {
+    body = `<path transform="rotate(-40 16 17)" d="M16 3C16 3 5.5 15 5.5 21a10.5 10.5 0 1 0 21 0C26.5 15 16 3 16 3Z" fill="${f}"/>`;
+    eyes = `<g fill="${EYE}" transform="rotate(-14 20 18)"><rect x="16.6" y="14.2" width="2.8" height="7" rx="1.4"/><rect x="21.4" y="13.8" width="2.8" height="7" rx="1.4"/></g>`;
+  } else if (shape === 'hex') {
+    body = `<polygon points="16,2.4 27.8,9.2 27.8,22.8 16,29.6 4.2,22.8 4.2,9.2" fill="${f}"/>`;
+    eyes = `<g fill="${EYE}"><rect x="12.2" y="11.6" width="2.8" height="8.4" rx="1.4"/><rect x="17" y="11.6" width="2.8" height="8.4" rx="1.4"/></g>`;
+  } else if (shape === 'cloud') {
+    body = `<g fill="${f}"><circle cx="10" cy="19" r="8"/><circle cx="19.2" cy="20" r="7.4"/><circle cx="15" cy="13" r="8.6"/><circle cx="7.4" cy="14.2" r="6"/><circle cx="23.2" cy="14.6" r="6.1"/></g>`;
+    eyes = `<g fill="${EYE}" transform="rotate(-8 19 16)"><rect x="15.6" y="12.4" width="2.7" height="6.6" rx="1.35"/><rect x="20.2" y="12.1" width="2.7" height="6.6" rx="1.35"/></g>`;
+  } else if (shape === 'square') {
+    body = `<rect x="3" y="3" width="26" height="26" rx="3" fill="${f}"/>`;
+    eyes = `<g fill="${EYE}" transform="rotate(-10 19 15)"><rect x="15.6" y="11.5" width="2.8" height="7.2" rx="1.4"/><rect x="20.5" y="11.2" width="2.8" height="7.2" rx="1.4"/></g>`;
+  }
+  return `<svg viewBox="-1 -1 34 34" class="p-shape" aria-hidden="true">${body}${eyes}</svg>`;
+}
+
 function personHTML(seat, color, x, y, where) {
-  const short = seat.title; // full name; desk tokens hide label (desk already shows title)
   const a = appearance(seat);
-  const shape = a.shape === 'round' ? ' shape-round' : '';
-  const headStyle = a.url ? ` style="background-image:url('${esc(cssUrl(a.url))}')"` : '';
+  const fill = a.color || color;
+  const shape = a.shape;
+  const head = a.url
+    ? `<i class="p-head has-img shape-${esc(shape)}" style="background-image:url('${esc(cssUrl(a.url))}');background-color:${esc(fill)}"></i>`
+    : `<span class="p-head shape-${esc(shape)}">${shapeSVG(shape, fill)}</span>`;
   return `<div class="person at-${where}" style="left:${x}px;top:${y}px" title="${esc(seat.title)} · ${where === 'desk' ? '工作' : '不工作'}">` +
-    `<i class="p-head${a.url ? ' has-img' : ''}${shape}"${headStyle}></i><i class="p-body" style="background:${esc(a.color || color)}"></i>` +
-    `<em>${esc(short)}</em></div>`;
+    head +
+    `<i class="p-body" style="background:${esc(fill)}"></i><i class="p-legs"></i>` +
+    `<em>${esc(seat.title)}</em></div>`;
 }
 
 function planHTML(groups) {

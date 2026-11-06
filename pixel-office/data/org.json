@@ -35,37 +35,51 @@
     {
       "floor": "3F",
       "department": "office",
-      "title": "Office Head"
+      "title": "Office Head",
+      "avatarShape": "wedge",
+      "avatarColor": "#10B8A0"
     },
     {
       "floor": "3F",
       "department": "optics",
-      "title": "Optics Head"
+      "title": "Optics Head",
+      "avatarShape": "cloud",
+      "avatarColor": "#F86810"
     },
     {
       "floor": "3F",
       "department": "painting",
-      "title": "Painting Head"
+      "title": "Painting Head",
+      "avatarShape": "teardrop",
+      "avatarColor": "#F09010"
     },
     {
       "floor": "2F",
       "department": "office",
-      "title": "Office PM"
+      "title": "Office PM",
+      "avatarShape": "teardrop",
+      "avatarColor": "#10B8A0"
     },
     {
       "floor": "2F",
       "department": "optics",
-      "title": "Optics PM"
+      "title": "Optics PM",
+      "avatarShape": "blob",
+      "avatarColor": "#F09010"
     },
     {
       "floor": "2F",
       "department": "painting",
-      "title": "Painting PM"
+      "title": "Painting PM",
+      "avatarShape": "blob",
+      "avatarColor": "#F82838"
     },
     {
       "floor": "1F",
       "department": "painting",
-      "title": "Ins Sampler"
+      "title": "Ins Sampler",
+      "avatarShape": "hex",
+      "avatarColor": "#A06838"
     },
     {
       "floor": "1F",
@@ -180,16 +194,24 @@
     },
     "restSlots": [
       {
-        "x": 544,
-        "y": 252
+        "x": 548,
+        "y": 248
       },
       {
-        "x": 544,
+        "x": 548,
+        "y": 292
+      },
+      {
+        "x": 548,
+        "y": 336
+      },
+      {
+        "x": 548,
+        "y": 368
+      },
+      {
+        "x": 590,
         "y": 310
-      },
-      {
-        "x": 544,
-        "y": 360
       }
     ]
   }

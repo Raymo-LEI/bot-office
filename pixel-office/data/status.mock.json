@@ -4,8 +4,7 @@
       "seatKey": "3F|office|Office Head",
       "working": true,
       "source": "mock",
-      "updatedAt": "2026-11-06T02:00:00+09:00",
-      "avatarShape": "round"
+      "updatedAt": "2026-11-06T02:00:00+09:00"
     },
     {
       "seatKey": "3F|optics|Optics Head",
@@ -23,8 +22,7 @@
       "seatKey": "2F|office|Office PM",
       "working": true,
       "source": "mock",
-      "updatedAt": "2026-11-06T02:00:00+09:00",
-      "avatarUrl": "assets/avatar-demo.png"
+      "updatedAt": "2026-11-06T02:00:00+09:00"
     },
     {
       "seatKey": "2F|optics|Optics PM",
@@ -36,9 +34,7 @@
       "seatKey": "2F|painting|Painting PM",
       "working": true,
       "source": "mock",
-      "updatedAt": "2026-11-06T02:00:00+09:00",
-      "avatarShape": "round",
-      "avatarColor": "#8E5BD9"
+      "updatedAt": "2026-11-06T02:00:00+09:00"
     },
     {
       "seatKey": "1F|painting|Ins Sampler",

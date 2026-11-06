@@ -52,19 +52,24 @@
             "string",
             "null"
           ],
-          "description": "可选头像图 URL（占位插槽；无官方真源）。缺省→通用像素头"
+          "description": "可选头像图 URL。有图用图（按 avatarShape 掩膜）。无图→形状填色+胶囊眼。无官方真源，仅为插槽。"
         },
         "avatarShape": {
           "type": "string",
           "enum": [
+            "wedge",
+            "teardrop",
+            "hex",
+            "blob",
+            "cloud",
             "round",
             "square"
           ],
-          "description": "可选头型；缺省=square"
+          "description": "头型：wedge=丸角右指三角/播放键，teardrop=水滴，hex=六边形，blob=圆，cloud=云朵/多瓣，round=同blob，square=方。缺省=blob（不再用桃色方块头）"
         },
         "avatarColor": {
           "type": "string",
-          "description": "可选 CSS 颜色，覆盖身体色（默认部门色）"
+          "description": "形状填色（CSS 颜色）；缺省用部门色"
         }
       },
       "description": "缺失/未知记录一律视为不工作；avatar* 字段可选，也可写在 org.json seat 上，status 记录值优先"

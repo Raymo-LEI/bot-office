@@ -27,10 +27,28 @@ cd pixel-office && python3 -m http.server 8765
 ### mock → live
 改 `js/status.js` 的 `STATUS_URL` 指向 live 端点（同一 StatusFile 形状），或替换 `data/status.mock.json`。
 
-## 外观插槽（avatar slots，占位）
+## 外观（侧边栏形状头）
 
-可选字段：`avatarUrl`（string|null）、`avatarShape`（`round`|`square`，缺省 square）、`avatarColor`（CSS 颜色，覆盖身体色）。
-可写在 `data/status*.json` 的 StatusRecord 上，也可写在 `data/org.json` 的 seat 上；**status 记录值优先于 seat 值**，缺失字段忽略。
-无 `avatarUrl` 时回退为通用像素小人（身体=部门色）。目前没有官方 live 头像源，这些字段仅为占位插槽；demo 图为 `assets/avatar-demo.png`（本地生成）。
+就座角色的 token 主体对齐 App 侧边栏小人：CSS/SVG **形状掩膜** + `avatarColor` 填色 + 两颗浅白胶囊眼。可带很小的身体/腿，用来辨认坐在工位还是站在休息区。默认不再使用桃色方块头。
 
-不工作（人在休息区）时，原工位名牌变灰、虚线框并标「(离席)」，桌椅保留。
+可选字段可写在 `data/org.json` 的 seat 上，或 `data/status*.json` 的 StatusRecord 上；**status 记录值优先于 seat 值**，空字段忽略。
+
+- `avatarUrl`（string|null）：有图用图（按 `avatarShape` 做掩膜）。这批座位无图。
+- `avatarShape`：`wedge`（丸角右指三角 / 播放键）| `teardrop`（水滴）| `hex`（六边形）| `blob`（圆）| `cloud`（云朵 / 多瓣）| `round`（同 blob）| `square`。缺省 `blob`。
+- `avatarColor`：形状填色；缺省用部门色。
+
+当前就座外形写在 `org.json` seats（待招不填、不扩座）：
+
+| title | floor | avatarShape | avatarColor |
+| --- | --- | --- | --- |
+| Office Head | 3F | wedge | `#10B8A0` |
+| Optics Head | 3F | cloud | `#F86810` |
+| Painting Head | 3F | teardrop | `#F09010` |
+| Office PM | 2F | teardrop | `#10B8A0` |
+| Optics PM | 2F | blob | `#F09010` |
+| Painting PM | 2F | blob | `#F82838` |
+| Ins Sampler | 1F | hex | `#A06838` |
+
+目前没有官方 live 头像源；`avatarUrl` 仍是占位插槽。`assets/avatar-demo.png` 仅作有图回退示例，mock 不再覆盖上述外形。
+
+不工作（人在休息区）时，原工位名牌变灰、虚线框并标「(离席)」，桌椅保留；名字标签跟人走。
